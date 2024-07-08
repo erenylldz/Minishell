@@ -4,6 +4,7 @@ FLAGS = -Wall -Wextra -Werror
 SRC = main.c
 OBJECTS = $(SRC:.c=.o)
 READLINE = -L./lib/readline/lib -I./lib/readline/include/readline -lreadline
+DIR = $(shell echo $(PWD))
 RL = ./lib/readline/lib/libreadline.a
 RM = rm -rf
 
