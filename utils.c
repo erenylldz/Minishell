@@ -1,36 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/04 17:28:42 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/07/11 15:23:27 by eryildiz         ###   ########.fr       */
+/*   Created: 2024/07/11 13:35:43 by eryildiz          #+#    #+#             */
+/*   Updated: 2024/07/11 15:24:31 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <signal.h>
-# include <fcntl.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-
-# define CMD_CHECK 1
-
-typedef struct s_cmd
+int	ft_strncmp(t_cmd *s1, char *s2, int len)
 {
-	char	*cmd;
-}	t_cmd;
+	int	i;
 
-void	shell_loop(t_cmd *str);
-int		ft_strncmp(t_cmd *s1, char *s2, int len);
-int		ft_len(t_cmd *str);
-void	is_cmd(t_cmd *str);
+	i = 0;
+	if ((!s1->cmd || !s2) || (len == 0))
+		return (0);
+	while (i < len)
+	{
+		if (s1->cmd[i] != s2[i])
+			return (s1->cmd[i] - s2[i]);
+		i++;
+	}
+	return (0);
+}
 
-#endif
+int	ft_len(t_cmd *str)
+{
+	int	i;
+
+	i = 0;
+	while (str->cmd[i])
+		i++;
+	return (i);
+}
