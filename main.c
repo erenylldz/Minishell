@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:40:09 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/07/17 14:42:05 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/07/17 16:03:06 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,20 @@
 
 int	main(int ac, char **av)
 {
-	t_cmd	*temp;
+	t_cmd	*str;
 
-	temp = (t_cmd *)malloc(sizeof(t_cmd));
-	if (!temp)
+	str = (t_cmd *)malloc(sizeof(t_cmd));
+	if (!str)
 		return (0);
-	shell_loop(temp);
+	shell_loop(str);
 }
 
 void	shell_loop(t_cmd *str)
 {
-	t_cmd	*read;
-
 	while (1)
 	{
-		read->cmd = readline("minishell>");
-		add_history(read->cmd);
-		dquote(&read->cmd);
-		squote(&read->cmd);
-		printf("%s", read->cmd);
+		str->cmd = readline("minishell>");
+		add_history(str->cmd);
+		quote_check(str);
 	}
 }

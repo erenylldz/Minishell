@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 17:28:42 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/07/17 14:27:38 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/07/17 15:57:08 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,5 @@ int		ft_strncmp(t_cmd *s1, char *s2, int len);
 int		ft_len(t_cmd	*str);
 int		dquote(t_cmd	*str);
 int		squote(t_cmd	*str);
+void	quote_check(t_cmd	*str);
 #endif
