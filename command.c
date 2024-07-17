@@ -6,24 +6,30 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 13:30:54 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/07/11 15:25:50 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/07/17 14:33:24 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	is_cmd(t_cmd *str)
+int	dquote(t_cmd	*str)
 {
-	if (ft_strncmp(str, "ls", ft_len(str)) != 0)
-		printf("not cmd\n");
-	else if (ft_strncmp(str, "echo", ft_len(str)) != 0)
-		printf("not cmd\n");
-	else if (ft_strncmp(str, "export", ft_len(str)) != 0)
-		printf("not cmd\n");
-	else if (ft_strncmp(str, "env", ft_len(str)) != 0)
-		printf("not cmd\n");
-	else if (ft_strncmp(str, "pwd", ft_len(str)) != 0)
-		printf("not cmd\n");
-	else
-		printf("please entry cmd\n");
+	int		i;
+
+	i = 0;
+	while (str->cmd[i++])
+		if (str->cmd[i] == '"')
+			str->dquote_count++;
+	return (str->dquote_count);
+}
+
+int	squote(t_cmd	*str)
+{
+	int		i;
+
+	i = 0;
+	while (str->cmd[i++])
+		if (str->cmd[i] == '\'')
+			str->squote_count++;
+	return (str->squote_count);
 }
