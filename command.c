@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amayuk <amayuk@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 13:30:54 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/07/21 14:55:39 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/07/21 17:39:23 by amayuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,3 +54,4 @@ void	quote_check(t_cmd	*str)
 	printf("%s\n", str->cmd);
 	printf("%d\n\n", str->dquote_count);
 }
+//Aysenur
