@@ -3,55 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amayuk <amayuk@student.42istanbul.com.t    +#+  +:+       +#+        */
+/*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 13:30:54 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/07/21 17:39:23 by amayuk           ###   ########.fr       */
+/*   Updated: 2024/07/21 19:31:26 by kgulfida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	dquote(t_cmd	*str)
-{
-	int		i;
-
-	i = 0;
-	str->dquote_count = 0;
-	while (str->cmd[i++] != '\0')
-		if (str->cmd[i] == '\"')
-			str->dquote_count++;
-	return (str->dquote_count);
-}
-
-int	squote(t_cmd	*str)
-{
-	int		i;
-
-	i = 0;
-	str->squote_count = 0;
-	while (str->cmd[i++] != '\0')
-		if (str->cmd[i] == '\'')
-			str->squote_count++;
-	return (str->squote_count);
-}
-
-void	quote_check(t_cmd	*str)
+void	quote_count(t_cmd	*str)
 {
 	int	i;
 
 	i = 0;
+	
+	str->dquote_count = 0;
+	str->squote_count = 0;
 	while (str->cmd[i] != '\0')
 	{
-		if (str->cmd[i] == '\"'
-			|| (str->cmd[i] == '\"' && str->cmd[i + 1] == '\''))
-			dquote(str);
+		if (str->cmd[i] == '"'
+			|| (str->cmd[i] == '"' || str->cmd[i + 1] == '\''))
+			str->dquote_count++;
 		else if (str->cmd[i] == '\''
-			|| (str->cmd[i] == '\'' && str->cmd[i + 1] == '\"'))
-			squote(str);
+			|| (str->cmd[i] == '\'' || str->cmd[i + 1] == '"'))
+			str->squote_count++;
 		i++;
 	}
-	printf("%s\n", str->cmd);
-	printf("%d\n\n", str->dquote_count);
+	if(str->dquote_count % 2 != 0 || str->squote_count % 2 != 0)
+		printf("error");
 }
 //Aysenur
