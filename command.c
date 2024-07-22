@@ -33,4 +33,4 @@ void	quote_count(t_cmd	*str)
 	if(str->dquote_count % 2 != 0 || str->squote_count % 2 != 0)
 		printf("error");
 }
-//Aysenur
+//Deneme
