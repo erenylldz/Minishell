@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amayuk <amayuk@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 17:28:42 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/02 17:16:16 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/06 17:04:47 by amayuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 typedef struct s_cmd
 {
 	char	*cmd;
+	char **args;
 	int		dquote_count;
 	int		squote_count;
 	bool	squote;
@@ -59,4 +60,5 @@ void	split_commands(t_cmd *str);
 void	process_quotes(t_cmd *str);
 size_t	ft_strnlen(const char *src, size_t i);
 char	*ft_strndup(const char *s, size_t n);
+void	ft_exit(t_cmd *str);
 #endif

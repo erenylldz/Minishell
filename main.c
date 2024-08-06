@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amayuk <amayuk@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:40:09 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/02 15:53:48 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/06 17:08:12 by amayuk           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,14 @@ int	main(int ac, char **av)
 	if(ac != 1)
 	{
 		printf("This program does not accept arguments\n");
-		exit(0);
+		return EXIT_FAILURE;
 	}
 	str = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!str)
 		return (0);
 	shell_loop(str);
+	free(str);
+	return EXIT_SUCCESS;
 }
 
 void	shell_loop(t_cmd *str)
@@ -33,5 +35,14 @@ void	shell_loop(t_cmd *str)
 		str->cmd = readline("minishell>");
 		add_history(str->cmd);
 		cmd_check(str);
+		
+		str->args = NULL;
+		
+		if (strcmp(str->cmd, "exit") == 0)
+        {
+            ft_exit(str);
+            break;
+        }
+        free(str->cmd); 
 	}
 }
