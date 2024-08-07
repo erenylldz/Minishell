@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amayuk <amayuk@student.42istanbul.com.t    +#+  +:+       +#+        */
+/*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 17:28:42 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/06 17:04:47 by amayuk           ###   ########.fr       */
+/*   Updated: 2024/08/06 19:08:09 by kgulfida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,22 @@
 # define TRUE 1
 # define FALSE 0
 
+// typedef struct s_pipe
+// {
+// 	size_t	parts_counts;
+// 	size_t	idx;
+// 	size_t	len;
+// 	char	*start;
+// 	char	*temp;
+// 	bool	single_quote;
+// 	char	**ncmd;
+// 	bool	double_quote;
+// }	t_pipe;
+
 typedef struct s_cmd
 {
 	char	*cmd;
-	char **args;
+	char	**args;
 	int		dquote_count;
 	int		squote_count;
 	bool	squote;
@@ -47,11 +59,8 @@ typedef struct s_cmd
 	bool	double_quote;
 }	t_cmd;
 
-// typedef struct s_pipe
-// {
-// }	t_pipe;
 
-void	shell_loop(t_cmd *str);
+void	shell_loop(t_cmd *str, char **env);
 void	quote_count(t_cmd	*str);
 void	pipe_check(t_cmd	*str);
 void	cmd_check(t_cmd *str);
@@ -61,4 +70,5 @@ void	process_quotes(t_cmd *str);
 size_t	ft_strnlen(const char *src, size_t i);
 char	*ft_strndup(const char *s, size_t n);
 void	ft_exit(t_cmd *str);
+void	print_env(char **env, int status);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 13:35:43 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/02 16:41:38 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/07 14:21:31 by kgulfida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ size_t	ft_strnlen(const char *src, size_t i)
 	size_t	idx;
 
 	idx = 0;
-	while(src[idx] && idx < i)
+	while (src[idx] && idx < i)
 	{
 		idx++;
 	}
-	return(idx);
+	return (idx);
 }

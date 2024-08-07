@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 13:30:54 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/02 17:16:55 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/07 16:59:36 by kgulfida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,31 @@
 
 void	cmd_check(t_cmd *str)
 {
-	pipe_check(str);
+	char **command;
+	int i;
+	
+	i = 0;
 	quote_count(str);
-}
-int	is_line_empty(t_cmd *str)
-{
-	str->i = 0;
-	while (str->cmd[str->i])
+	pipe_check(str);
+	while (str->ncmd[i])
 	{
-		if (str->cmd[str->i] != ' ' || str->cmd[str->i] != '\t')
-			return (FALSE);
-		str->i++;
+		command = ft_split(str->ncmd[i], ' ');
+		i++;
 	}
-	return (TRUE);
 }
+
+// int	is_line_empty(t_cmd *str)
+// {
+// 	str->i = 0;
+// 	while (str->cmd[str->i])
+// 	{
+// 		if (str->cmd[str->i] != ' ' || str->cmd[str->i] != '\t')
+// 			return (FALSE);
+// 		str->i++;
+// 	}
+// 	return (TRUE);
+// }
+
 void	quote_count(t_cmd	*str)
 {
 	str->i = 0;

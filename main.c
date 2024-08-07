@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amayuk <amayuk@student.42istanbul.com.t    +#+  +:+       +#+        */
+/*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:40:09 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/06 17:08:12 by amayuk           ###   ########.fr       */
+/*   Updated: 2024/08/07 17:04:35 by kgulfida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int ac, char **av)
+int	main(int ac, char **av, char **env)
 {
+	(void)av;
 	t_cmd	*str;
 	if(ac != 1)
 	{
@@ -23,12 +24,12 @@ int	main(int ac, char **av)
 	str = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!str)
 		return (0);
-	shell_loop(str);
+	shell_loop(str, env);
 	free(str);
 	return EXIT_SUCCESS;
 }
 
-void	shell_loop(t_cmd *str)
+void	shell_loop(t_cmd *str, char **env)
 {
 	while (1)
 	{
@@ -43,6 +44,8 @@ void	shell_loop(t_cmd *str)
             ft_exit(str);
             break;
         }
+		else if(strcmp(str->cmd, "env") == 0)
+			print_env(env, 0); //BURASI EXPORTA GÖRE DÜZENLENECEK
         free(str->cmd); 
 	}
 }
