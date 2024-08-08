@@ -1,7 +1,7 @@
 NAME = minishell
 CC = gcc
-FLAGS = -Wall -Wextra -Werror
-SRC = main.c command.c utils.c pipe.c exit.c env.c $(LIBSRC)
+CFLAGS = -Wall -Wextra -Werror
+M_SRC = main.c command.c utils.c pipe.c exit.c env.c
 LIBSRC = libft/ft_isalpha.c libft/ft_isdigit.c libft/ft_isalnum.c libft/ft_isascii.c libft/ft_isprint.c \
 	libft/ft_strlen.c libft/ft_memset.c libft/ft_bzero.c libft/ft_memcpy.c libft/ft_memmove.c \
 	libft/ft_strlcpy.c libft/ft_strlcat.c libft/ft_toupper.c libft/ft_tolower.c libft/ft_strchr.c \
@@ -10,6 +10,7 @@ LIBSRC = libft/ft_isalpha.c libft/ft_isdigit.c libft/ft_isalnum.c libft/ft_isasc
 	libft/ft_itoa.c libft/ft_strmapi.c libft/ft_striteri.c libft/ft_putchar_fd.c libft/ft_putstr_fd.c \
 	libft/ft_putendl_fd.c libft/ft_putnbr_fd.c
 
+SRC = $(M_SRC) $(LIBSRC)
 OBJECTS = $(SRC:.c=.o)
 READLINE = -L./lib/readline/lib -I./lib/readline/include/readline -lreadline -lncurses
 DIR = $(shell echo $(PWD))
@@ -18,8 +19,8 @@ RM = rm -rf
 
 all: $(NAME)
 
-$(NAME) : $(RL) $(OBJECTS)
-	$(CC) $(FLAGS) -o $(NAME) $(OBJECTS) $(READLINE)
+$(NAME): $(RL) $(OBJECTS)
+		$(CC) $(CFLAGS) -o $(NAME) $(OBJECTS) $(READLINE)
 $(RL):
 			@echo "Downloading the readline library"
 			@curl -O https://ftp.gnu.org/gnu/readline/readline-8.2-rc1.tar.gz

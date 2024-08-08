@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 17:28:42 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/06 19:08:09 by kgulfida         ###   ########.fr       */
+/*   Updated: 2024/08/08 15:03:04 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ typedef struct s_cmd
 	bool	squote;
 	bool	dquote;
 	int		i;
+	int		ncmd_count;
+	char	***command;
 //	t_pipe data;
 	size_t	parts_counts;
 	size_t	idx;
@@ -71,4 +73,5 @@ size_t	ft_strnlen(const char *src, size_t i);
 char	*ft_strndup(const char *s, size_t n);
 void	ft_exit(t_cmd *str);
 void	print_env(char **env, int status);
+void	ft_split_space(t_cmd *str);
 #endif
