@@ -6,9 +6,16 @@
 /*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 16:04:45 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/07 16:27:39 by kgulfida         ###   ########.fr       */
+/*   Updated: 2024/08/09 17:09:29 by kgulfida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
+
+
+
+// BU FONKSİYONLAR YEDEK OLARAK DURUYOR KULLANILMIYOR!!!!!!!!!!!
+
 
 #include "minishell.h"
 
@@ -57,7 +64,35 @@ void	pipe_check(t_cmd *str)
 				+ str->len - str->start);
 		str->parts_counts++;
 	}
+	str->ncmd[str->parts_counts] = NULL;
 // 	// BU FOR SİLİNECEK!!!!!!!!!!!
 	// for (size_t i = 0; i < str->parts_counts; i++)
 	// 	printf("%s\n", str->ncmd[i]);
+}
+
+
+char	*ft_strndup(const char *s, size_t n)
+{
+	char	*dup;
+	size_t	len;
+
+	len = ft_strnlen(s, n);
+	dup = (char *)malloc(len + 1);
+	if (!dup)
+		return (NULL);
+	ft_memcpy(dup, s, len);
+	dup[len] = '\0';
+	return (dup);
+}
+
+size_t	ft_strnlen(const char *src, size_t i)
+{
+	size_t	idx;
+
+	idx = 0;
+	while (src[idx] && idx < i)
+	{
+		idx++;
+	}
+	return (idx);
 }
