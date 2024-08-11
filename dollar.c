@@ -1,39 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/11 18:54:30 by kgulfida          #+#    #+#             */
-/*   Updated: 2024/08/11 18:54:31 by kgulfida         ###   ########.fr       */
+/*   Created: 2024/08/11 15:21:48 by kgulfida          #+#    #+#             */
+/*   Updated: 2024/08/11 18:54:11 by kgulfida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "minishell"
 
-void	ft_exit(t_cmd *str)
+void	handle_dollar(t_cmd *str)
 {
-	int	exit_status;
 	int	i;
+	int	j;
 
-	exit_status = 0;
-	printf("exit\n");
-	if (str->cmd && strcmp(str->cmd, "exit") == 0)
+	i = 0;
+	j = 0;
+	while (str->command[i][j])
 	{
-		if (str->args && str->args[1])
-			exit_status = atoi(str->args[1]);
-		free(str->cmd);
-		if (str->args)
+		while (str->command[i][j])
 		{
-			i = 0;
-			while (str->args[i])
+			if (array_in_dollar(str->command[i][j]) == 1)
+				// echo lkjlj | cat a.txt
 			{
-				free(str->args[i]);
-				i++;
+				if () // dolar tek tırnak içerisinde mi
 			}
-			free(str->args);
+			j++;
 		}
-		exit(exit_status);
+		i++;
 	}
+}
+
+int		array_in_dollar(char *s);
+{
+	int i;
+
+	i = 0;
+	while (s[i] != NULL)
+	{
+		if (s[i] == '$')
+			return (1);
+		i++;
+	}
+	return (0);
 }

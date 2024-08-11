@@ -6,7 +6,7 @@
 /*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 17:28:42 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/09 20:09:02 by kgulfida         ###   ########.fr       */
+/*   Updated: 2024/08/11 17:34:22 by kgulfida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,66 +14,53 @@
 # define MINISHELL_H
 
 # include "libft/libft.h"
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <signal.h>
 # include <fcntl.h>
-# include <string.h>
-#include  <stdbool.h>
-# include <readline/readline.h>
 # include <readline/history.h>
+# include <readline/readline.h>
+# include <signal.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <unistd.h>
 
 # define TRUE 1
 # define FALSE 0
 
-// typedef struct s_pipe
-// {
-// 	size_t	parts_counts;
-// 	size_t	idx;
-// 	size_t	len;
-// 	char	*start;
-// 	char	*temp;
-// 	bool	single_quote;
-// 	char	**ncmd;
-// 	bool	double_quote;
-// }	t_pipe;
-
 typedef struct s_cmd
 {
-	char	*cmd;
-	char	**args;
-	int		dquote_count;
-	int		squote_count;
-	bool	squote;
-	bool	dquote;
-	int		i;
-	int		j;
-	int		ncmd_count;
-	char	***command;
-//	t_pipe data;
-	size_t	parts_counts;
-	size_t	idx;
-	size_t	len;
-	char	**ncmd;
-	char	*start;
-	char	*temp;
-	bool	single_quote;
-	bool	double_quote;
-}	t_cmd;
+	char			*cmd;
+	char			**ncmd;
+	char			***command;
+	char			**args;
+	int				dquote_count;
+	int				squote_count;
+	int				i;
+	int				ncmd_count;
+	bool			squote;
+	bool			dquote;
+	bool			single_quote;
+	bool			double_quote;
+}					t_cmd;
 
+typedef struct s_env
+{
+	char			*key;
+	char			*value;
+	struct s_env	*next;
+}					t_env;
 
-void	shell_loop(t_cmd *str, char **env);
-void	quote_count(t_cmd	*str);
-void	pipe_check(t_cmd	*str);
-void	cmd_check(t_cmd *str);
-int		is_line_empty(t_cmd *str);
-void	split_commands(t_cmd *str);
-void	process_quotes(t_cmd *str);
-size_t	ft_strnlen(const char *src, size_t i);
-char	*ft_strndup(const char *s, size_t n);
-void	ft_exit(t_cmd *str);
-void	print_env(char **env, int status);
-void	ft_split_space(t_cmd *str);
-char	**ft_split2(char const *s, char c);
+void				shell_loop(t_cmd *str, char **env, t_env *env_list);
+void				quote_count(t_cmd *str);
+void				cmd_check(t_cmd *str);
+size_t				ft_strnlen(const char *src, size_t i);
+char				*ft_strndup(const char *s, size_t n);
+void				ft_exit(t_cmd *str);
+void				ft_split_space(t_cmd *str);
+char				**ft_split2(char const *s, char c);
+void				print_env_list(t_env *env_list);
+void				parse_env(char **envp, t_env **env_list);
+void				add_env_node(t_env **env_list, char *key, char *value);
+t_env				*create_env_node(char *key, char *value);
+void				free_env_list(t_env *env_list);
 #endif

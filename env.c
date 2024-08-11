@@ -1,46 +1,98 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/11 15:20:21 by kgulfida          #+#    #+#             */
+/*   Updated: 2024/08/11 15:34:30 by kgulfida         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-// int count_environ(char **environ)
-// {
-//     int i;
-
-//     i = 0;
-//     if(!environ)
-//         return (0);
-//     while(environ[i])
-//         i++;
-//     return (i);
-// }
-
-// void add_env(char **env, char *str)
-// {
-// 	char **new;
-// 	int env_len;
-// 	int i;
-
-// 	env_len = count_environ(env);
-// 	new = malloc(sizeof(char *) * count_environ(env) + 2);
-// 	i = 0;
-// 	while (env[i])
-// 	{
-// 		new[i] = ft_strdup(env[i]);
-// 		i++;
-// 	}
-// 	new[++env_len] = str;
-// 	new[++env_len] = NULL;
-// }
-
-void	print_env(char **env, int status)
+// Yeni bir ortam değişkeni düğümü oluşturma fonksiyonu
+t_env	*create_env_node(char *key, char *value)
 {
-	char	**envr;
+	t_env	*new_node;
 
-	envr = env;
-	// add_env(envr, "a=b");
-	while (*envr)
+	new_node = malloc(sizeof(t_env));
+	if (!new_node)
+		return (NULL);
+	new_node->key = key;
+	new_node->value = value;
+	new_node->next = NULL;
+	return (new_node);
+}
+
+// Bağlı listeye bir düğüm ekleme fonksiyonu
+void	add_env_node(t_env **env_list, char *key, char *value)
+{
+	t_env	*new_node;
+	t_env	*temp;
+
+	new_node = create_env_node(key, value);
+	temp = *env_list;
+	if (!new_node)
+		return ;
+	if (!*env_list)
 	{
-		if (status == 1)
-			printf("declare -x");
-		printf("%s\n", *envr);
-		envr++;
+		*env_list = new_node;
+		return ;
+	}
+	while (temp->next)
+		temp = temp->next;
+	temp->next = new_node;
+}
+
+// Ortam değişkenlerini ayırma ve listeye ekleme fonksiyonu
+void	parse_env(char **envp, t_env **env_list)
+{
+	int		i;
+	char	*key;
+	char	*value;
+	char	*delimiter;
+
+	i = 0;
+	while (envp[i])
+	{
+		key = NULL;
+		value = NULL;
+		delimiter = ft_strchr(envp[i], '=');
+		if (delimiter)
+		{
+			key = ft_strndup(envp[i], delimiter - envp[i]);
+			// '=' öncesi kısmı al
+			value = ft_strdup(delimiter + 1);
+			// '=' sonrası kısmı al
+			add_env_node(env_list, key, value);
+		}
+		i++;
+	}
+}
+
+// Bağlı listeyi yazdırma fonksiyonu (debug için)
+void	print_env_list(t_env *env_list)
+{
+	while (env_list)
+	{
+		printf("%s=%s\n", env_list->key, env_list->value);
+		env_list = env_list->next;
+	}
+}
+
+// Belleği serbest bırakma fonksiyonu
+void	free_env_list(t_env *env_list)
+{
+	t_env	*temp;
+
+	while (env_list)
+	{
+		temp = env_list;
+		env_list = env_list->next;
+		free(temp->key);
+		free(temp->value);
+		free(temp);
 	}
 }
