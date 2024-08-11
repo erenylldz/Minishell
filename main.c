@@ -51,6 +51,10 @@ void	shell_loop(t_cmd *str, char **env, t_env *env_list)
 			print_env_list(env_list);
 			free_env_list(env_list);
 		}
+		else if (strcmp(str->cmd, "pwd") == 0)
+		{
+			ft_pwd(str);
+		}
 		free(str->cmd);
 	}
 }

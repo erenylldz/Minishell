@@ -26,6 +26,7 @@
 
 # define TRUE 1
 # define FALSE 0
+# define BUILTIN 9
 
 typedef struct s_cmd
 {
@@ -36,11 +37,13 @@ typedef struct s_cmd
 	int				dquote_count;
 	int				squote_count;
 	int				i;
+	int				j; // make atılmıyordu
 	int				ncmd_count;
 	bool			squote;
 	bool			dquote;
 	bool			single_quote;
 	bool			double_quote;
+	int				status; // İşlem durumu için
 }					t_cmd;
 
 typedef struct s_env
@@ -63,4 +66,5 @@ void				parse_env(char **envp, t_env **env_list);
 void				add_env_node(t_env **env_list, char *key, char *value);
 t_env				*create_env_node(char *key, char *value);
 void				free_env_list(t_env *env_list);
+void	ft_pwd(t_cmd *str);
 #endif

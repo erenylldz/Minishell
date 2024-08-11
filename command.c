@@ -58,8 +58,8 @@ void	quote_count(t_cmd *str)
 
 void	ft_split_space(t_cmd *str)
 {
-	int	x;
-	int	y;
+	//int	x; make atılmıyordu
+	//int	y; make atılmıyordu
 
 	str->double_quote = false;
 	str->single_quote = false;
@@ -69,9 +69,22 @@ void	ft_split_space(t_cmd *str)
 	while (str->ncmd[str->ncmd_count] != NULL)
 		str->ncmd_count++;
 	str->command = (char ***)malloc((str->ncmd_count + 1) * sizeof(char **));
+	//silinebilir ↓
+	if (!str->command) // malloc'ın başarısız olma durumu kontrol ediliyor
+		return;
+	//
 	while (str->ncmd[str->i])
 	{
 		str->command[str->i] = ft_split2(str->ncmd[str->i], ' ');
+		//silinebilir ↓
+		if (!str->command[str->i]) // malloc'ın başarısız olma durumu kontrol ediliyor
+		{
+			while (str->i-- > 0)
+				free(str->command[str->i]);
+			free(str->command);
+			return;
+		}
+		//
 		str->i++;
 	}
 	str->command[str->ncmd_count] = NULL;
