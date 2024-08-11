@@ -6,7 +6,7 @@
 /*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 13:30:54 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/09 20:04:51 by kgulfida         ###   ########.fr       */
+/*   Updated: 2024/08/10 11:41:58 by kgulfida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void	ft_split_space(t_cmd *str)
 		str->i++;
 	}
 	str->command[str->ncmd_count] = NULL;
+
+	// AŞAĞIDAKİ DÖNGÜ KONTROL AMAÇLI YAZILDI SİLİNECEK!!!!!!!!!!!!
 	x = 0;
 	while (str->command[x] != NULL)
 	{
