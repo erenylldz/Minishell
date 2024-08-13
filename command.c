@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 13:30:54 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/11 15:34:38 by kgulfida         ###   ########.fr       */
+/*   Updated: 2024/08/13 19:45:26 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ void	quote_count(t_cmd *str)
 
 void	ft_split_space(t_cmd *str)
 {
-	//int	x; make atılmıyordu
-	//int	y; make atılmıyordu
+	int	x; //make atılmıyordu
+	int	y; //make atılmıyordu
 
 	str->double_quote = false;
 	str->single_quote = false;
@@ -89,16 +89,16 @@ void	ft_split_space(t_cmd *str)
 	}
 	str->command[str->ncmd_count] = NULL;
 	// AŞAĞIDAKİ DÖNGÜ KONTROL AMAÇLI YAZILDI SİLİNECEK!!!!!!!!!!!!
-	// x = 0;
-	// while (str->command[x] != NULL)
-	// {
-	// 	y = 0;
-	// 	printf("Command %d:\n", x);
-	// 	while (str->command[x][y] != NULL)
-	// 	{
-	// 		printf("  Arg %d: %s\n", y, str->command[x][y]);
-	// 		y++;
-	// 	}
-	// 	x++;
-	// }
+	x = 0;
+	while (str->command[x] != NULL)
+	{
+		y = 0;
+		printf("Command %d:\n", x);
+		while (str->command[x][y] != NULL)
+		{
+			printf("  Arg %d: %s\n", y, str->command[x][y]);
+			y++;
+		}
+		x++;
+	}
 }

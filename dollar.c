@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 15:21:48 by kgulfida          #+#    #+#             */
-/*   Updated: 2024/08/13 19:27:18 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/13 19:49:06 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	handle_dollar(t_cmd *str)
 				if (dollar_between_quotes(str->command[i][j]) == 1)
 					printf("DOLAR\n");//print_dollar(str->command[i][j]);//dolardan sonra gelen değeri metin olarak yazdıracak işlem
 				else
+					printf("status\n");
 					dollar_case(str->command[i][j], str->env_list);
 			}
 			else
@@ -86,7 +87,6 @@ void	dollar_case(char *s, t_env *env_list)
 			printf("%s\n", get_value);
 		}
 		i++;
-
 	}
 }
 

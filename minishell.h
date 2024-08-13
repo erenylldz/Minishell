@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 17:28:42 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/13 19:27:31 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/13 19:37:43 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@
 # define TRUE 1
 # define FALSE 0
 # define BUILTIN 9
+# define HEREDOC 11
+# define APPEND 12
+# define LEFTR 13
+# define RIGHTR 14
 
 typedef struct s_cmd
 {
@@ -53,6 +57,13 @@ typedef struct s_env
 	char			*value;
 	struct s_env	*next;
 }					t_env;
+
+typedef struct s_token
+{
+	char	*data;
+	struct	s_token	*prev;
+	struct	s_token	*next;
+}	t_token;
 
 void				shell_loop(t_cmd *str, char **env, t_env *env_list);
 void				quote_count(t_cmd *str);

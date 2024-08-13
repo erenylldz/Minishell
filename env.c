@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 15:20:21 by kgulfida          #+#    #+#             */
-/*   Updated: 2024/08/11 15:34:30 by kgulfida         ###   ########.fr       */
+/*   Updated: 2024/08/13 19:51:20 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,4 +108,3 @@ char	*get_env_value(t_env *env_list, const char *key)
 	}
 	return (NULL);
 }
-
