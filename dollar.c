@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 15:21:48 by kgulfida          #+#    #+#             */
-/*   Updated: 2024/08/11 19:19:41 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/13 19:27:18 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ void	handle_dollar(t_cmd *str)
 
 	i = 0;
 	j = 0;
-	while (str->command[i][j])
+	while (str->command[i] != NULL)
 	{
 		while (str->command[i][j])
 		{
 			if (array_in_dollar(str->command[i][j]) == 1)
 			{
 				if (dollar_between_quotes(str->command[i][j]) == 1)
-					print_dollar(str->command[i][j])//dolardan sonra gelen değeri metin olarak yazdıracak işlem
+					printf("DOLAR\n");//print_dollar(str->command[i][j]);//dolardan sonra gelen değeri metin olarak yazdıracak işlem
 				else
-					dollar_case(str->command[i][j])
+					dollar_case(str->command[i][j], str->env_list);
 			}
 			else
 				break;
@@ -52,10 +52,13 @@ int	array_in_dollar(char *s)
 int	dollar_between_quotes(char *s)
 {
 	int	i;
+	t_cmd	*str;
+	str = malloc(sizeof(t_cmd));
+	if (!str)
+		return (0);
 
 	i = 0;
 	str->dquote = false;
-	str->squote = false;
 	while (s[i])
 	{
 		if (s[i] == '\"')
@@ -67,23 +70,23 @@ int	dollar_between_quotes(char *s)
 	return (0);
 }
 
-void	dollar_case(char *s)
+void	dollar_case(char *s, t_env *env_list)
 {
+	char	*get_value;
 	int	i;
 
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] == '$' && s[i + 1] == '$')
-			print_current_pid();
-		else if (s[i] == '$' && s[i + 1] == '?')
-			//EXIT STATUSU BASTIRACAK FONKSİYON
+		if (s[i] == '$' && s[i + 1] == '?')
+			printf("STATUS\n"); //print_exit_value();
 		else
-			//envden key arayıp valueyi yazdıracak fonskiyon
+		{
+			get_value = get_env_value(env_list, s);
+			printf("%s\n", get_value);
+		}
+		i++;
+
 	}
 }
-void	print_current_pid()
-{
-	pid_t pid = getpid();
-	printf("%d: command not found\n", pid);
-}
+

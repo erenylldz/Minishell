@@ -1,4 +1,4 @@
-prefix=/Users/aysenurmayuk/Desktop/minishell/lib/readline
+prefix=/home/virus/Desktop/Minishell-main/lib/readline
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include

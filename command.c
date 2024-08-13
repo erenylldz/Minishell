@@ -17,6 +17,7 @@ void	cmd_check(t_cmd *str)
 	quote_count(str);
 	str->ncmd = ft_split2(str->cmd, '|');
 	ft_split_space(str);
+	handle_dollar(str);
 }
 
 void	quote_count(t_cmd *str)
@@ -84,7 +85,6 @@ void	ft_split_space(t_cmd *str)
 			free(str->command);
 			return;
 		}
-		//
 		str->i++;
 	}
 	str->command[str->ncmd_count] = NULL;
