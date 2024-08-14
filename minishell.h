@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 17:28:42 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/13 19:37:43 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/14 16:43:30 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_cmd
 	bool			double_quote;
 	int				status; // İşlem durumu için
 	struct s_env	*env_list;
+	char			*in_out;
 }					t_cmd;
 
 typedef struct s_env
@@ -85,4 +86,8 @@ void	handle_dollar(t_cmd *str);
 int	array_in_dollar(char *s);
 int	dollar_between_quotes(char *s);
 void	dollar_case(char *s, t_env *env_list);
+void	redirect(t_cmd *str);
+int	array_in_redirect(char *s);
+void	get_redirect_name(char	**str);
+void	take_name_file(char *s);
 #endif

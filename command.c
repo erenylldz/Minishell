@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 13:30:54 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/13 19:45:26 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/14 14:05:11 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	cmd_check(t_cmd *str)
 	str->ncmd = ft_split2(str->cmd, '|');
 	ft_split_space(str);
 	handle_dollar(str);
+	redirect(str);
 }
 
 void	quote_count(t_cmd *str)
