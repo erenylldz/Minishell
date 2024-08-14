@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 17:28:42 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/14 16:43:30 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/14 20:13:45 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,20 @@
 # define TRUE 1
 # define FALSE 0
 # define BUILTIN 9
-# define HEREDOC 11
-# define APPEND 12
-# define LEFTR 13
-# define RIGHTR 14
-
+# define HEREDOC 10
+# define APPEND 11
+# define INPUT 12
+# define OUTPUT 13
 typedef struct s_cmd
 {
 	char			*cmd;
 	char			**ncmd;
 	char			***command;
 	char			**args;
+	char			**heredoc;
+	char			**append;
+	char			**input;
+	char			**output;
 	int				dquote_count;
 	int				squote_count;
 	int				i;
@@ -89,5 +92,5 @@ void	dollar_case(char *s, t_env *env_list);
 void	redirect(t_cmd *str);
 int	array_in_redirect(char *s);
 void	get_redirect_name(char	**str);
-void	take_name_file(char *s);
+void	take_name_file(char *s, int x);
 #endif
