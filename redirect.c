@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 19:38:05 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/14 20:31:54 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/21 16:20:17 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,28 +101,30 @@ void	get_redirect_name(char	**str)
 
 void	take_name_file(char *s, int x)
 {
-	int	h;
-	int	a;
-	int	o;
-	int	i;
-	t_cmd	*str;
-	str = malloc(sizeof(t_cmd));
+	int	h = 0;
+	int	a = 0;
+	int	o = 0;
+	int	i = 0;
+	t_cmd	*str = malloc(sizeof(t_cmd));
 	if (!str)
 		return ;
 
-	i = 0;
-	h = 0;
-	o = 0;
-	a = 0;
+	str->heredoc = malloc(sizeof(char *) * HEREDOC_SIZE);
+	str->append = malloc(sizeof(char *) * APPEND_SIZE);
+	str->input = malloc(sizeof(char *) * INPUT_SIZE);
+	str->output = malloc(sizeof(char *) * OUTPUT_SIZE);
+
+	if (!str->heredoc || !str->append || !str->input || !str->output)
+		return ;
+
 	if (x == HEREDOC)
-		str->heredoc[h] = ft_strdup(s);
+		str->heredoc[h++] = ft_strdup(s);
 	else if(x == APPEND)
-		str->append[a] = ft_strdup(s);
+		str->append[a++] = ft_strdup(s);
 	else if(x == INPUT)
-		printf("INPUT\n");
-		// str->input[i] = ft_strdup(s);
+		str->input[i++] = ft_strdup(s);
 	else if (x == OUTPUT)
-		str->output[o] = ft_strdup(s);
-	// printf("%s", str->input[y]);
+		str->output[o++] = ft_strdup(s);
+	printf("%s\n", str->output[0]);
 }
 

@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 17:28:42 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/14 20:13:45 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/21 16:19:19 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@
 # define APPEND 11
 # define INPUT 12
 # define OUTPUT 13
+# define HEREDOC_SIZE 999
+# define APPEND_SIZE 999
+# define INPUT_SIZE 999
+# define OUTPUT_SIZE 999
 typedef struct s_cmd
 {
 	char			*cmd;
