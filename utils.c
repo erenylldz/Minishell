@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 13:35:43 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/14 16:47:17 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/21 20:41:27 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ size_t	ft_strnlen(const char *src, size_t i)
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
+	if (!s1 || !s2)
+		return (-1);
 	while (*s1 && (*s1 == *s2))
 	{
 		s1++;

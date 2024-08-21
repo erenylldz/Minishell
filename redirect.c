@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 19:38:05 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/21 16:20:17 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/21 21:00:13 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,6 @@ void	take_name_file(char *s, int x)
 
 	if (!str->heredoc || !str->append || !str->input || !str->output)
 		return ;
-
 	if (x == HEREDOC)
 		str->heredoc[h++] = ft_strdup(s);
 	else if(x == APPEND)

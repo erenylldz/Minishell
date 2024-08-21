@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 15:20:21 by kgulfida          #+#    #+#             */
-/*   Updated: 2024/08/13 19:51:20 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/21 20:46:52 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,9 @@ void	free_env_list(t_env *env_list)
 // Env de arama yapıp key value eşlemesi yapacak fonksiyon
 char	*get_env_value(t_env *env_list, const char *key)
 {
-	while (env_list)
+	while (env_list != NULL)
 	{
-		if (ft_strcmp(env_list->key, key) == 0)
+		if (strcmp(env_list->key, key) == 0)
 			return (env_list->value);
 		env_list = env_list->next;
 	}

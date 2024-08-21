@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 15:21:48 by kgulfida          #+#    #+#             */
-/*   Updated: 2024/08/21 17:20:50 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/21 20:43:57 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	handle_dollar(t_cmd *str)
 {
-	t_env	*env_list;
-	env_list = malloc(sizeof(t_env));
+	char	*env_value;
 	int	i;
+	int k=0;
 	int	j;
 
 	i = 0;
@@ -27,13 +27,15 @@ void	handle_dollar(t_cmd *str)
 		{
 			if (array_in_dollar(str->command[i][j]) == 1)
 			{
-				if (dollar_between_quotes(str->command[i][j]) == 1)
-					printf("\nDOLAR\n");//print_dollar_quote(str->command[i][j]);//dolardan sonra gelen değeri metin olarak yazdıracak işlem
-				else
+				if (get_env_value(str->env_list, str->command[i][j]) != NULL)
 				{
-					printf("%s\n",str->command[i][j]);
-					dollar_case(str->command[i][j], str->env_list);
+					env_value = get_env_value(str->env_list, &str->command[i][j][k + 1]);
+					printf("%s\n", env_value);//change_dollar_value(str, env_value, 1);
 				}
+				else
+					printf("ENV YOK\n");//change_dollar_value(str, env_value, 1);
+					//change_dollar_value(str, env_value, 2);
+
 			}
 			else
 				break;
@@ -56,52 +58,7 @@ int	array_in_dollar(char *s)
 	}
 	return (0);
 }
-
-
-int	dollar_between_quotes(char *s)
-{
-	int	i;
-	t_cmd	*str;
-	str = malloc(sizeof(t_cmd));
-	if (!str)
-		return (0);
-
-	i = 0;
-	str->dquote = false;
-	while (s[i])
-	{
-		if (s[i] == '\"')
-			str->dquote = true;
-		else if (s[i] == '\'' && !str->dquote)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-void	dollar_case(char *s, t_env *env_list)
-{
-	// char	*get_value;
-	int	i;
-
-	i = 0;
-	(void)env_list;
-	while (s[i])
-	{
-		if (s[i] == '$' && s[i + 1] == '?')
-			printf("STATUS\n"); //print_exit_value();
-		else
-		{
-			// get_value = get_env_value(env_list, s);
-			// printf("%s\n", get_value);
-			printf("ENV\n");
-		}
-		i++;
-	}
-}
-
-void	print_dollar_quote(t_cmd *str)
-{
-	
-}
-
+// void	change_dollar_value(t_cmd *str, char *value, int process)
+// {
+// 	if
+// }
