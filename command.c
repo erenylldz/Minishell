@@ -19,6 +19,7 @@ void	cmd_check(t_cmd *str)
 	ft_split_space(str);
 	handle_dollar(str);
 	redirect(str);
+	choose_str(str);
 }
 
 void	quote_count(t_cmd *str)
@@ -60,9 +61,6 @@ void	quote_count(t_cmd *str)
 
 void	ft_split_space(t_cmd *str)
 {
-	int	x; //make atılmıyordu
-	int	y; //make atılmıyordu
-
 	str->double_quote = false;
 	str->single_quote = false;
 	str->i = 0;
@@ -90,16 +88,18 @@ void	ft_split_space(t_cmd *str)
 	}
 	str->command[str->ncmd_count] = NULL;
 	// AŞAĞIDAKİ DÖNGÜ KONTROL AMAÇLI YAZILDI SİLİNECEK!!!!!!!!!!!!
-	x = 0;
-	while (str->command[x] != NULL)
+	int z;
+    int y;
+    z = 0;
+	while (str->command[z] != NULL)
 	{
 		y = 0;
-		printf("Command %d:\n", x);
-		while (str->command[x][y] != NULL)
+		printf("Command %d:\n", z);
+		while (str->command[z][y] != NULL)
 		{
-			printf("  Arg %d: %s\n", y, str->command[x][y]);
+			printf("  Arg %d: %s\n", y, str->command[z][y]);
 			y++;
 		}
-		x++;
+		z++;
 	}
 }

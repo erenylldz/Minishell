@@ -124,6 +124,5 @@ void	take_name_file(char *s, int x)
 		str->input[i++] = ft_strdup(s);
 	else if (x == OUTPUT)
 		str->output[o++] = ft_strdup(s);
-	printf("%s\n", str->output[0]);
 }
 
