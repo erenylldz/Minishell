@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 13:35:43 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/21 20:41:27 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/23 19:54:31 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,22 @@ int	ft_strcmp(const char *s1, const char *s2)
 		s2++;
 	}
 	return (*(unsigned char *)s1 - *(unsigned char *)s2);
+}
+
+void	print_cmd(t_cmd *str)
+{
+	int z;
+    int y;
+    z = 0;
+	while (str->command[z] != NULL)
+	{
+		y = 0;
+		printf("Command %d:\n", z);
+		while (str->command[z][y] != NULL)
+		{
+			printf("  Arg %d: %s\n", y, str->command[z][y]);
+			y++;
+		}
+		z++;
+	}
 }

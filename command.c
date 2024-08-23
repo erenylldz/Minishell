@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 13:30:54 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/14 14:05:11 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/23 20:15:02 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	cmd_check(t_cmd *str)
 	handle_dollar(str);
 	redirect(str);
 	choose_str(str);
+	print_cmd(str);
 }
 
 void	quote_count(t_cmd *str)
@@ -87,19 +88,19 @@ void	ft_split_space(t_cmd *str)
 		str->i++;
 	}
 	str->command[str->ncmd_count] = NULL;
-	// AŞAĞIDAKİ DÖNGÜ KONTROL AMAÇLI YAZILDI SİLİNECEK!!!!!!!!!!!!
-	int z;
-    int y;
-    z = 0;
-	while (str->command[z] != NULL)
-	{
-		y = 0;
-		printf("Command %d:\n", z);
-		while (str->command[z][y] != NULL)
-		{
-			printf("  Arg %d: %s\n", y, str->command[z][y]);
-			y++;
-		}
-		z++;
-	}
+	// // AŞAĞIDAKİ DÖNGÜ KONTROL AMAÇLI YAZILDI SİLİNECEK!!!!!!!!!!!!
+	// int z;
+    // int y;
+    // z = 0;
+	// while (str->command[z] != NULL)
+	// {
+	// 	y = 0;
+	// 	printf("Command %d:\n", z);
+	// 	while (str->command[z][y] != NULL)
+	// 	{
+	// 		printf("  Arg %d: %s\n", y, str->command[z][y]);
+	// 		y++;
+	// 	}
+	// 	z++;
+	// }
 }
