@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 13:35:43 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/23 19:54:31 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/24 16:34:45 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ int	ft_strcmp(const char *s1, const char *s2)
 void	print_cmd(t_cmd *str)
 {
 	int z;
-    int y;
-    z = 0;
+	int y;
+	z = 0;
 	while (str->command[z] != NULL)
 	{
 		y = 0;

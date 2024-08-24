@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:40:09 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/21 21:19:35 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/24 16:34:08 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	shell_loop(t_cmd *str, char **env, t_env *env_list)
 		{
 			parse_env(env, &env_list);
 			print_env_list(env_list);
-			free_env_list(env_list);
+			//free_env_list(env_list);
 		}
 		else if (strcmp(str->cmd, "pwd") == 0)
 		{

@@ -6,60 +6,75 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:40:12 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/23 19:52:00 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/24 14:35:33 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    choose_str(t_cmd *str)
+void	choose_str(t_cmd *str)
 {
-    char    *temp;
-    int i = 0;
-    int j;
+	char	*temp;
+	int		i = 0;
+	int		j;
 
-    while(str->command[i])
-    {
-        j = 0;
-        while (str->command[i][j])
-        {
-            temp = swap_command(str->command[i][j], str);
-            str->command[i][j] = temp;
-            j++;
-        }
-        i++;
-    }
-	free(temp);
+	while(str->command[i])
+	{
+		j = 0;
+		while (str->command[i][j])
+		{
+			if (in_quote_check(str->command[i][j]) == 1)
+			{
+				temp = swap_command(str->command[i][j], str);
+				str->command[i][j] = temp;
+			}
+			j++;
+		}
+		i++;
+	}
 }
-
-char    *swap_command(char *dest, t_cmd *str)
+int	in_quote_check(char	*s)
 {
-    char    *src;
+	int i = 0;
 
-	int	len = ft_strlen(dest);
-    // src = malloc(sizeof(char) * (ft_strlen(dest) /*- (str->squote_count + str->dquote_count))*/));
-    // if (!src)
-    //     return (NULL);
-    int i = 0;
-    int j = 0;
-    str->double_quote = false;
-    str->single_quote = false;
-    while (i < len)
-    {
-        if (dest[i] == '\"' && !str->single_quote)
-        {
-            str->double_quote = !str->double_quote;
-            i++;
-        }
-        else if (dest[i] == '\'' && !str->double_quote)
-        {
-            str->single_quote = !str->single_quote;
-            i++;
-        }
-        src = ft_strdup(dest);
+	while(s[i])
+	{
+		if (s[i] == '\'' || s[i] == '\"')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+char	*swap_command(char *dest, t_cmd *str)
+{
+	char	*src;
+	int		len;
+	int		j;
+	int		i;
+
+	i = 0;
+	j = 0;
+	str->single_quote = false;
+	str->double_quote = false;
+	len = ft_strlen(dest);
+	src = malloc(sizeof(char) * (ft_strlen(dest) + 1));
+	if (!src)
+		return (NULL);
+	while (i < len)
+	{
+		if (dest[i] == '\"' && !str->single_quote)
+		{
+			str->double_quote = !str->double_quote;
+			i++;
+		}
+		if (dest[i] == '\'' && !str->double_quote)
+		{
+			str->single_quote = !str->single_quote;
+			i++;
+		}
+		src[j] = dest[i];
 		j++;
 		i++;
-    }
-	printf("%s\n",src );
-    return(src);
+	}
+	return(src);
 }

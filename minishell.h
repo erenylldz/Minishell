@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 17:28:42 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/23 19:55:00 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/24 15:29:06 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,10 @@ void				redirect(t_cmd *str);
 int					array_in_redirect(char *s);
 void				get_redirect_name(char	**str);
 void				take_name_file(char *s, int x);
-void    choose_str(t_cmd *str);
-char    *swap_command(char *dest, t_cmd *str);
-void	print_cmd(t_cmd *str);
+void				choose_str(t_cmd *str);
+char				*swap_command(char *dest, t_cmd *str);
+void				print_cmd(t_cmd *str);
+int					in_quote_check(char	*s);
+void				delete_dollar_value(t_cmd	*str);
 #endif
+
