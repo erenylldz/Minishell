@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 15:20:21 by kgulfida          #+#    #+#             */
-/*   Updated: 2024/08/24 16:26:46 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/24 18:36:10 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,20 @@ void	print_env_list(t_env *env_list)
 	}
 }
 
+char	*get_env_value(t_env *env_list, char *key)
+{
+	if (!env_list)
+		return (NULL);
+	while (env_list != NULL)
+	{
+		// printf("***%s\n" , key);
+		// printf("---%s\n", env_list->key);
+		if (ft_strcmp(env_list->key, key) == 0)
+			return (env_list->value);
+		env_list = env_list->next;
+	}
+	return (NULL);
+}
 // Belleği serbest bırakma fonksiyonu
 void	free_env_list(t_env *env_list)
 {
@@ -98,15 +112,3 @@ void	free_env_list(t_env *env_list)
 }
 
 // Env de arama yapıp key value eşlemesi yapacak fonksiyon
-char	*get_env_value(t_env *env_list, const char *key)
-{
-	if (!env_list)
-		return (NULL);
-	while (env_list != NULL)
-	{
-		if (ft_strcmp(env_list->key, key) == 0)
-			return (env_list->value);
-		env_list = env_list->next;
-	}
-	return (NULL);
-}

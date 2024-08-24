@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:40:09 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/24 16:34:08 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/24 18:33:45 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int ac, char **av, char **env)
 	str = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!str)
 		return (0);
+	parse_env(env, &env_list);
 	shell_loop(str, env, env_list);
 	free(str);
 	return (EXIT_SUCCESS);
@@ -38,7 +39,7 @@ void	shell_loop(t_cmd *str, char **env, t_env *env_list)
 	{
 		str->cmd = readline("minishell>");
 		add_history(str->cmd);
-		cmd_check(str);
+		cmd_check(str, env_list);
 		str->args = NULL;
 		if (strcmp(str->cmd, "exit") == 0)
 		{

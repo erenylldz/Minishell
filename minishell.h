@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 17:28:42 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/24 15:29:06 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/24 18:23:21 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef struct s_token
 
 void				shell_loop(t_cmd *str, char **env, t_env *env_list);
 void				quote_count(t_cmd *str);
-void				cmd_check(t_cmd *str);
+void				cmd_check(t_cmd *str, t_env *env_list);
 size_t				ft_strnlen(const char *src, size_t i);
 char				*ft_strndup(const char *s, size_t n);
 void				ft_exit(t_cmd *str);
@@ -86,10 +86,10 @@ void				parse_env(char **envp, t_env **env_list);
 void				add_env_node(t_env **env_list, char *key, char *value);
 t_env				*create_env_node(char *key, char *value);
 void				free_env_list(t_env *env_list);
-char				*get_env_value(t_env *env_list, const char *key);
-int					ft_strcmp(const char *s1, const char *s2);
+char				*get_env_value(t_env *env_list, char *key);
+int					ft_strcmp( char *s1, char *s2);
 void				ft_pwd(t_cmd *str);
-void				handle_dollar(t_cmd *str);
+void				handle_dollar(t_cmd *str, t_env *env_list);
 int					array_in_dollar(char *s);
 int					dollar_between_quotes(char *s);
 void				dollar_case(char *s, t_env *env_list);

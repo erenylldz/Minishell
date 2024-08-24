@@ -6,18 +6,18 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 13:30:54 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/24 13:11:04 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/24 18:22:32 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	cmd_check(t_cmd *str)
+void	cmd_check(t_cmd *str, t_env	*env_list)
 {
 	quote_count(str);
 	str->ncmd = ft_split2(str->cmd, '|');
 	ft_split_space(str);
-	handle_dollar(str);
+	handle_dollar(str, env_list);
 	redirect(str);
 	choose_str(str);
 	print_cmd(str);

@@ -6,13 +6,13 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 15:21:48 by kgulfida          #+#    #+#             */
-/*   Updated: 2024/08/24 15:31:33 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/24 18:48:21 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	handle_dollar(t_cmd *str)
+void	handle_dollar(t_cmd *str, t_env *env_list)
 {
 	char	*env_value;
 	int		i;
@@ -26,16 +26,16 @@ void	handle_dollar(t_cmd *str)
 		j = 0;
 		while (str->command[i][j])
 		{
-			if (array_in_dollar(str->command[i][j]) == 1)
+			if (array_in_dollar(str->command[i][j]) != -1)
 			{
 				if (dollar_between_quotes(str->command[i][j]) != 1)
 				{
-					if (get_env_value(str->env_list, str->command[i][j]) != NULL)
+					if (get_env_value(env_list, &str->command[i][j][k + 1 + array_in_dollar(str->command[i][j])]) != NULL)
 					{
-						env_value = get_env_value(str->env_list, &str->command[i][j][k + 1]);
+						env_value = get_env_value(env_list, &str->command[i][j][k + 1 + array_in_dollar(str->command[i][j])]);
 						str->command[i][j] = env_value;
 					}
-					else if (get_env_value(str->env_list, str->command[i][j]) == NULL)
+					else if (get_env_value(env_list, str->command[i][j]) == NULL)
 						delete_dollar_value(str);
 				}
 			}
@@ -55,10 +55,10 @@ int	array_in_dollar(char *s)
 	while (s[i])
 	{
 		if (s[i] == '$')
-			return (1);
+			return (i);
 		i++;
 	}
-	return (0);
+	return (-1);
 }
 int	dollar_between_quotes(char *s)
 {

@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 13:35:43 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/24 16:34:45 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/24 18:10:21 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ size_t	ft_strnlen(const char *src, size_t i)
 	return (idx);
 }
 
-int	ft_strcmp(const char *s1, const char *s2)
+int	ft_strcmp(char *s1, char *s2)
 {
 	if (!s1 || !s2)
 		return (-1);
