@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 17:28:42 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/25 17:40:43 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/25 19:24:15 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,7 @@ int					in_quote_check(char	*s);
 void				delete_dollar_value(t_cmd	*str);
 char				*dollar_in_dquote(char	*str);
 void				dollar_case(t_cmd *str, t_env *env_list);
+char				*find_dollar(char *str, int dq);
+int					dollar_ascii(char c);
 #endif
 

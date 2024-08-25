@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 15:21:48 by kgulfida          #+#    #+#             */
-/*   Updated: 2024/08/25 19:08:46 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/25 20:04:10 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ void	dollar_case(t_cmd *str, t_env *env_list)
 
 char *dollar_in_dquote(char *str)
 {
+	char	*temp;
 	int	i;
 	int	dq;
 
@@ -142,23 +143,37 @@ char *dollar_in_dquote(char *str)
 			dq++;
 		i++;
 	}
-	find_dollar(str, dq)
+	temp = find_dollar(str, dq);
+	return(temp);
 }
 char	*find_dollar(char *str, int dq)
 {
+	char	*temp;
 	int	i;
+	int	j;
 
 	i = 0;
-
+	j = 0;
+	temp = malloc((strlen(str) + 1) * sizeof(char));
 	if (dq % 2 == 0)
 	{
 		while(str[i])
 		{
-
+			if(dollar_ascii(str[i]) == 1)
+			{
+				temp[j] = str[i];
+				j++;
+			}
+			i++;
 		}
 	}
+	temp[j] = '\0';
+	printf("%s\n", temp);
+	return (temp);
 }
 int	dollar_ascii(char c)
 {
-	if (c )
+	if ((c >= 48 && c <= 57) || (c >= 65 && c <= 90) || c == 32 || c == 95)
+		return (1);
+	return(0);
 }
