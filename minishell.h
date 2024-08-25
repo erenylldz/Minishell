@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 17:28:42 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/24 18:23:21 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/25 17:40:43 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ void				ft_pwd(t_cmd *str);
 void				handle_dollar(t_cmd *str, t_env *env_list);
 int					array_in_dollar(char *s);
 int					dollar_between_quotes(char *s);
-void				dollar_case(char *s, t_env *env_list);
 void				redirect(t_cmd *str);
 int					array_in_redirect(char *s);
 void				get_redirect_name(char	**str);
@@ -102,5 +101,7 @@ char				*swap_command(char *dest, t_cmd *str);
 void				print_cmd(t_cmd *str);
 int					in_quote_check(char	*s);
 void				delete_dollar_value(t_cmd	*str);
+char				*dollar_in_dquote(char	*str);
+void				dollar_case(t_cmd *str, t_env *env_list);
 #endif
 

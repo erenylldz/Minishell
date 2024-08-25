@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 15:21:48 by kgulfida          #+#    #+#             */
-/*   Updated: 2024/08/24 18:48:21 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/25 19:08:46 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	handle_dollar(t_cmd *str, t_env *env_list)
 {
-	char	*env_value;
 	int		i;
 	int		k;
 	int		j;
@@ -29,15 +28,7 @@ void	handle_dollar(t_cmd *str, t_env *env_list)
 			if (array_in_dollar(str->command[i][j]) != -1)
 			{
 				if (dollar_between_quotes(str->command[i][j]) != 1)
-				{
-					if (get_env_value(env_list, &str->command[i][j][k + 1 + array_in_dollar(str->command[i][j])]) != NULL)
-					{
-						env_value = get_env_value(env_list, &str->command[i][j][k + 1 + array_in_dollar(str->command[i][j])]);
-						str->command[i][j] = env_value;
-					}
-					else if (get_env_value(env_list, str->command[i][j]) == NULL)
-						delete_dollar_value(str);
-				}
+					dollar_case(str, env_list);
 			}
 			else
 				break;
@@ -99,4 +90,75 @@ void	delete_dollar_value(t_cmd	*str)
 		}
 		i++;
 	}
+}
+void	dollar_case(t_cmd *str, t_env *env_list)
+{
+	int	i;
+	int	j;
+	int	k;
+	char	*key;
+	char	*temp;
+
+	i = 0;
+	k = 0;
+	while (str->command[i])
+	{	j = 0;
+		while(str->command[i][j])
+		{
+			if (dollar_in_dquote(str->command[i][j]) != NULL)
+			{
+				key = dollar_in_dquote(str->command[i][j]);
+				if(get_env_value(env_list, key) != NULL)
+				{
+					temp = get_env_value(env_list, key);
+					str->command[i][j] = temp;
+				}
+				else
+					delete_dollar_value(str);
+			}
+			else if (get_env_value(env_list, &str->command[i][j][k + 1 + array_in_dollar(str->command[i][j])]) != NULL)
+			{
+				temp = get_env_value(env_list, &str->command[i][j][k + 1 + array_in_dollar(str->command[i][j])]);
+				str->command[i][j] = temp;
+			}
+			else
+				delete_dollar_value(str);
+			j++;
+		}
+		i++;
+	}
+}
+
+char *dollar_in_dquote(char *str)
+{
+	int	i;
+	int	dq;
+
+	i = 0;
+	dq = 0;
+	while (str[i])
+	{
+		if (str[i] == '\"')
+			dq++;
+		i++;
+	}
+	find_dollar(str, dq)
+}
+char	*find_dollar(char *str, int dq)
+{
+	int	i;
+
+	i = 0;
+
+	if (dq % 2 == 0)
+	{
+		while(str[i])
+		{
+
+		}
+	}
+}
+int	dollar_ascii(char c)
+{
+	if (c )
 }
