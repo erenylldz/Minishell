@@ -15,11 +15,10 @@
 void	handle_dollar(t_cmd *str, t_env *env_list)
 {
 	int		i;
-	int		k;
 	int		j;
 
 	i = 0;
-	k = 0;
+
 	while (str->command[i] != NULL)
 	{
 		j = 0;
@@ -129,51 +128,84 @@ void	dollar_case(t_cmd *str, t_env *env_list)
 	}
 }
 
-char *dollar_in_dquote(char *str)
+// Çift tırnak sayısını kontrol ediyor
+int count_quotes(char *str)
 {
-	char	*temp;
-	int	i;
-	int	dq;
+    int quote_count;
+    int i;
 
 	i = 0;
-	dq = 0;
-	while (str[i])
+	quote_count = 0;
+    while (str[i]) 
 	{
-		if (str[i] == '\"')
-			dq++;
-		i++;
-	}
-	temp = find_dollar(str, dq);
-	return(temp);
+        if (str[i] == '\"') 
+            quote_count++;
+        i++;
+    }
+    return (quote_count);
 }
-char	*find_dollar(char *str, int dq)
-{
-	char	*temp;
-	int	i;
-	int	j;
 
+// Çift tırnak içindeki ilk karakterin adresini dönüyor
+char *find_start_in_quotes(char *str)
+{
+    int i;
+	
 	i = 0;
+    while (str[i] && str[i] != '\"')
+	{
+        i++;
+    }
+    return (&str[++i]);
+}
+
+// '$' karakterini bulup ve dolardan sonraki metni dönüyor
+char *find_dollar_in_quotes(char *str) 
+{
+    int i;
+	
+	i = 0;
+    while (str[i] && str[i] != '$') 
+	{
+        i++;
+    }
+    if (str[i] == '$') 
+        return (&str[++i]);
+    return (NULL);
+}
+
+// Kabul edilebilir karakterlerin hepsini kopyalar
+char *copy_acceptable_chars(char *start) 
+{
+    int i;
+	
+	i = 0;
+    while (start[i] && (ft_isalnum(start[i]) || start[i] == '_' || start[i] == ' ')) 
+        i++;
+    char *temp;
+	temp = (char *)malloc(i + 1);
+    if (!temp)
+        return (NULL);	
+    int j;
 	j = 0;
-	temp = malloc((strlen(str) + 1) * sizeof(char));
-	if (dq % 2 == 0)
+    while (j < i) 
 	{
-		while(str[i])
-		{
-			if(dollar_ascii(str[i]) == 1)
-			{
-				temp[j] = str[i];
-				j++;
-			}
-			i++;
-		}
-	}
-	temp[j] = '\0';
-	printf("%s\n", temp);
-	return (temp);
+        temp[j] = start[j];
+        j++;
+    }
+    temp[i] = '\0';
+    return (temp);
 }
-int	dollar_ascii(char c)
+
+char *dollar_in_dquote(char *str) 
 {
-	if ((c >= 48 && c <= 57) || (c >= 65 && c <= 90) || c == 32 || c == 95)
-		return (1);
-	return(0);
+    if (count_quotes(str) != 2) 
+        return (NULL);
+    char *start;
+    char *dollar_str;
+	
+	start = find_start_in_quotes(str);
+	dollar_str = find_dollar_in_quotes(start);
+    if (!dollar_str)
+        return (NULL);
+    return (copy_acceptable_chars(dollar_str));
 }

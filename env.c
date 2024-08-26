@@ -82,6 +82,7 @@ void	print_env_list(t_env *env_list)
 	}
 }
 
+// Env de arama yapıp key value eşlemesi yapacak fonksiyon
 char	*get_env_value(t_env *env_list, char *key)
 {
 	if (!env_list)
@@ -96,6 +97,7 @@ char	*get_env_value(t_env *env_list, char *key)
 	}
 	return (NULL);
 }
+
 // Belleği serbest bırakma fonksiyonu
 void	free_env_list(t_env *env_list)
 {
@@ -111,4 +113,3 @@ void	free_env_list(t_env *env_list)
 	}
 }
 
-// Env de arama yapıp key value eşlemesi yapacak fonksiyon
