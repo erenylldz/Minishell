@@ -103,7 +103,11 @@ int					in_quote_check(char	*s);
 void				delete_dollar_value(t_cmd	*str);
 char				*dollar_in_dquote(char	*str);
 void				dollar_case(t_cmd *str, t_env *env_list);
-char				*find_dollar(char *str, int dq);
-int					dollar_ascii(char c);
+char 				*replace_key_with_value(char *array, char *value, char *key);
+int 				count_quotes(char *str);
+char 				*find_start_in_quotes(char *str);
+char 				*find_dollar_in_quotes(char *str);
+char 				*copy_acceptable_chars(char *start);
+char				*create_new_string(char *array, char *start, char *value, char *key);
 #endif
 

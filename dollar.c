@@ -97,7 +97,7 @@ void	dollar_case(t_cmd *str, t_env *env_list)
 	int	k;
 	char	*key;
 	char	*temp;
-
+	char	*change_val;
 	i = 0;
 	k = 0;
 	while (str->command[i])
@@ -110,7 +110,11 @@ void	dollar_case(t_cmd *str, t_env *env_list)
 				if(get_env_value(env_list, key) != NULL)
 				{
 					temp = get_env_value(env_list, key);
-					str->command[i][j] = temp;
+					if (replace_key_with_value(str->command[i][j], temp, key) != NULL)
+					{
+						change_val = replace_key_with_value(str->command[i][j], temp, key);
+						str->command[i][j] = change_val;
+					}	
 				}
 				else
 					delete_dollar_value(str);
@@ -208,4 +212,39 @@ char *dollar_in_dquote(char *str)
     if (!dollar_str)
         return (NULL);
     return (copy_acceptable_chars(dollar_str));
+}
+
+char	*create_new_string(char *array, char *start, char *value, char *key)
+{
+	char	*new_str;
+	int		before_key_len;
+	int		after_key_len;
+	int		value_len;
+
+	before_key_len = start - array;
+	after_key_len = ft_strlen(start + ft_strlen(key) + 1);
+	value_len = ft_strlen(value);
+
+	new_str = (char *)malloc(before_key_len + value_len + after_key_len + 1);
+	if (!new_str)
+		return (NULL);
+
+	ft_strlcpy(new_str, array, before_key_len);
+	strcpy(new_str + before_key_len, value);
+	strcpy(new_str + before_key_len + value_len, start + ft_strlen(key) + 1);
+
+	return (new_str);
+}
+
+char	*replace_key_with_value(char *array, char *value, char *key)
+{
+	char	*start;
+	char	*dollar_str;
+
+	dollar_str = dollar_in_dquote(array);
+	if (!dollar_str || ft_strcmp(dollar_str, key) != 0)
+		return (NULL);
+
+	start = strstr(array, "$");
+	return (create_new_string(array, start, value, key));
 }
