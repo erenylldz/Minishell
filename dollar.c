@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 15:21:48 by kgulfida          #+#    #+#             */
-/*   Updated: 2024/08/27 17:49:29 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/27 18:23:51 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,39 +67,15 @@ int	dollar_between_quotes(char *s)
 	}
 	return (0);
 }
-void	delete_dollar_value(t_cmd	*str)
-{
-	int	i;
-	int	j;
-	int	k;
-
-	i = 0;
-	while(str->command[i])
-	{
-		j = 0;
-		while(str->command[i][j])
-		{
-			k = 0;
-			while(str->command[i][j][k])
-			{
-				str->command[i][j][k] = 0;
-				k++;
-			}
-			j++;
-		}
-		i++;
-	}
-}
 void	dollar_case(t_cmd *str, t_env *env_list)
 {
 	int	i;
 	int	j;
-	int	k;
+
 	char	*key;
 	char	*temp;
 	char	*change_val;
 	i = 0;
-	k = 0;
 	while (str->command[i])
 	{	j = 0;
 		while(str->command[i][j])
@@ -115,17 +91,38 @@ void	dollar_case(t_cmd *str, t_env *env_list)
 						change_val = overwrite_value(str->command[i][j], temp);
 						str->command[i][j] = change_val;
 					}
+					else
+					{
+						change_val = delete_dollar_value(str->command[i][j]);
+						str->command[i][j] = change_val;
+					}
 				}
 				else
-					delete_dollar_value(str);
-			}
-			else if (get_env_value(env_list, &str->command[i][j][k + 1 + array_in_dollar(str->command[i][j])]) != NULL)
-			{
-				temp = get_env_value(env_list, &str->command[i][j][k + 1 + array_in_dollar(str->command[i][j])]);
-				str->command[i][j] = temp;
+					delete_dollar_value(str->command[i][j]);
 			}
 			else
-				delete_dollar_value(str);
+			{
+				key = dollar_not_dquote(str->command[i][j]);
+				if (get_env_value(env_list, key) != NULL)
+				{
+					temp = get_env_value(env_list, key);
+					if (overwrite_value(str->command[i][j], temp) != NULL)
+					{
+						change_val = overwrite_value(str->command[i][j], temp);
+						str->command[i][j] = change_val;
+					}
+					else
+					{
+						change_val = delete_dollar_value(str->command[i][j]);
+						str->command[i][j] = change_val;
+					}
+				}
+				else
+				{
+					change_val = delete_dollar_value(str->command[i][j]);
+					str->command[i][j] = change_val;
+				}
+			}
 			j++;
 		}
 		i++;
@@ -212,8 +209,28 @@ char	*dollar_in_dquote(char *str)
 		return (NULL);
 	return (copy_acceptable_chars(dollar_str));
 }
-
-char	*overwrite_value(char *array, char	*value)
+char	*delete_dollar_value(char *array)
+{
+	char	*dollar_after;
+	char	*dollar_before;
+	char	*join;
+	int		idx;
+	int		len;
+	if (find_dolllar_index(array) != -1)
+	{
+		len = find_dolllar_index(array);
+		dollar_before = ft_substr(array, 0, len);
+	}
+	if (key_end_index(array) != -1)
+	{
+		idx = key_end_index(array);
+		len = after_key_chars_number(array, idx);
+		dollar_after = ft_substr(array, idx, len);
+	}
+	join = ft_strjoin(dollar_before, dollar_after);
+	return (join);
+}
+char	*overwrite_value(char *array, char *value)
 {
 	char	*dollar_after;
 	char	*dollar_before;
@@ -272,4 +289,12 @@ int	key_end_index(char *s)
 		i++;
 	return(i);
 }
+char	*dollar_not_dquote(char *str)
+{
+	char	*dollar_str;
 
+	dollar_str = find_dollar_in_quotes(str);
+	if (!dollar_str)
+		return (NULL);
+	return (copy_acceptable_chars(dollar_str));
+}

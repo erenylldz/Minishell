@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 17:28:42 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/27 17:35:01 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/27 18:16:40 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,16 +100,17 @@ void				choose_str(t_cmd *str);
 char				*swap_command(char *dest, t_cmd *str);
 void				print_cmd(t_cmd *str);
 int					in_quote_check(char	*s);
-void				delete_dollar_value(t_cmd	*str);
+char				*delete_dollar_value(char *array);
 char				*dollar_in_dquote(char	*str);
 void				dollar_case(t_cmd *str, t_env *env_list);
-int 				count_quotes(char *str);
-char 				*find_start_in_quotes(char *str);
-char 				*find_dollar_in_quotes(char *str);
-char 				*copy_acceptable_chars(char *start);
+int					count_quotes(char *str);
+char				*find_start_in_quotes(char *str);
+char				*find_dollar_in_quotes(char *str);
+char				*copy_acceptable_chars(char *start);
 int					key_end_index(char *s);
 int					after_key_chars_number(char *s, int idx);
 int					find_dolllar_index(char *s);
 char				*overwrite_value(char *array, char	*value);
+char				*dollar_not_dquote(char *str);
 #endif
 
