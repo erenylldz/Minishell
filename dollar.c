@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 15:21:48 by kgulfida          #+#    #+#             */
-/*   Updated: 2024/08/25 20:04:10 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/27 17:49:29 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,11 +110,11 @@ void	dollar_case(t_cmd *str, t_env *env_list)
 				if(get_env_value(env_list, key) != NULL)
 				{
 					temp = get_env_value(env_list, key);
-					if (replace_key_with_value(str->command[i][j], temp, key) != NULL)
+					if (overwrite_value(str->command[i][j], temp) != NULL)
 					{
-						change_val = replace_key_with_value(str->command[i][j], temp, key);
+						change_val = overwrite_value(str->command[i][j], temp);
 						str->command[i][j] = change_val;
-					}	
+					}
 				}
 				else
 					delete_dollar_value(str);
@@ -132,119 +132,144 @@ void	dollar_case(t_cmd *str, t_env *env_list)
 	}
 }
 
-// Çift tırnak sayısını kontrol ediyor
-int count_quotes(char *str)
+int	count_quotes(char *str)
 {
-    int quote_count;
-    int i;
+	int quote_count;
+	int i;
 
 	i = 0;
 	quote_count = 0;
-    while (str[i]) 
+	while (str[i])
 	{
-        if (str[i] == '\"') 
-            quote_count++;
-        i++;
-    }
-    return (quote_count);
+		if (str[i] == '\"')
+			quote_count++;
+		i++;
+	}
+	return (quote_count);
 }
 
-// Çift tırnak içindeki ilk karakterin adresini dönüyor
-char *find_start_in_quotes(char *str)
+
+char	*find_start_in_quotes(char *str)
 {
-    int i;
-	
+	int	i;
+
 	i = 0;
-    while (str[i] && str[i] != '\"')
+	while (str[i] && str[i] != '\"')
 	{
-        i++;
-    }
-    return (&str[++i]);
+		i++;
+	}
+	return (&str[++i]);
 }
 
-// '$' karakterini bulup ve dolardan sonraki metni dönüyor
-char *find_dollar_in_quotes(char *str) 
+
+char	*find_dollar_in_quotes(char *str)
 {
-    int i;
-	
+	int i;
+
 	i = 0;
-    while (str[i] && str[i] != '$') 
+	while (str[i] && str[i] != '$')
 	{
-        i++;
-    }
-    if (str[i] == '$') 
-        return (&str[++i]);
-    return (NULL);
+		i++;
+	}
+	if (str[i] == '$')
+		return (&str[++i]);
+	return (NULL);
 }
 
-// Kabul edilebilir karakterlerin hepsini kopyalar
-char *copy_acceptable_chars(char *start) 
+char	*copy_acceptable_chars(char *start)
 {
-    int i;
-	
+	int i;
+
 	i = 0;
-    while (start[i] && (ft_isalnum(start[i]) || start[i] == '_' || start[i] == ' ')) 
-        i++;
-    char *temp;
+	while (start[i] && (ft_isalnum(start[i]) || start[i] == '_' || start[i] == ' '))
+		i++;
+	char *temp;
 	temp = (char *)malloc(i + 1);
-    if (!temp)
-        return (NULL);	
-    int j;
+	if (!temp)
+		return (NULL);
+	int j;
+
 	j = 0;
-    while (j < i) 
+	while (j < i)
 	{
-        temp[j] = start[j];
-        j++;
-    }
-    temp[i] = '\0';
-    return (temp);
+		temp[j] = start[j];
+		j++;
+	}
+	temp[i] = '\0';
+	return (temp);
 }
 
-char *dollar_in_dquote(char *str) 
+char	*dollar_in_dquote(char *str)
 {
-    if (count_quotes(str) != 2) 
-        return (NULL);
-    char *start;
-    char *dollar_str;
-	
+	if (count_quotes(str) != 2)
+		return (NULL);
+	char *start;
+	char *dollar_str;
+
 	start = find_start_in_quotes(str);
 	dollar_str = find_dollar_in_quotes(start);
-    if (!dollar_str)
-        return (NULL);
-    return (copy_acceptable_chars(dollar_str));
-}
-
-char	*create_new_string(char *array, char *start, char *value, char *key)
-{
-	char	*new_str;
-	int		before_key_len;
-	int		after_key_len;
-	int		value_len;
-
-	before_key_len = start - array;
-	after_key_len = ft_strlen(start + ft_strlen(key) + 1);
-	value_len = ft_strlen(value);
-
-	new_str = (char *)malloc(before_key_len + value_len + after_key_len + 1);
-	if (!new_str)
+	if (!dollar_str)
 		return (NULL);
-
-	ft_strlcpy(new_str, array, before_key_len);
-	strcpy(new_str + before_key_len, value);
-	strcpy(new_str + before_key_len + value_len, start + ft_strlen(key) + 1);
-
-	return (new_str);
+	return (copy_acceptable_chars(dollar_str));
 }
 
-char	*replace_key_with_value(char *array, char *value, char *key)
+char	*overwrite_value(char *array, char	*value)
 {
-	char	*start;
+	char	*dollar_after;
+	char	*dollar_before;
+	char	*join;
+	int		idx;
+	int		len;
+	if (find_dolllar_index(array) != -1)
+	{
+		len = find_dolllar_index(array);
+		dollar_before = ft_substr(array, 0, len);
+	}
+	if (key_end_index(array) != -1)
+	{
+		idx = key_end_index(array);
+		len = after_key_chars_number(array, idx);
+		dollar_after = ft_substr(array, idx, len);
+	}
+	join = ft_strjoin(dollar_before, value);
+	join = ft_strjoin(join, dollar_after);
+	return (join);
+}
+
+int	find_dolllar_index(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == '$')
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+int	after_key_chars_number(char *s, int idx)
+{
+	int	i;
+
+	i = 0;
+	while (s[idx])
+	{
+		idx++;
+		i++;
+	}
+	return (i);
+}
+int	key_end_index(char *s)
+{
+	int	i;
 	char	*dollar_str;
 
-	dollar_str = dollar_in_dquote(array);
-	if (!dollar_str || ft_strcmp(dollar_str, key) != 0)
-		return (NULL);
-
-	start = strstr(array, "$");
-	return (create_new_string(array, start, value, key));
+	i = 0;
+	dollar_str = find_dollar_in_quotes(s);
+	while (dollar_str[i] && (ft_isalnum(dollar_str[i]) || dollar_str[i] == '_' || dollar_str[i] == ' '))
+		i++;
+	return(i);
 }
+
