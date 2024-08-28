@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 15:21:48 by kgulfida          #+#    #+#             */
-/*   Updated: 2024/08/27 18:23:51 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/28 16:14:32 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,10 @@ void	dollar_case(t_cmd *str, t_env *env_list)
 					}
 				}
 				else
-					delete_dollar_value(str->command[i][j]);
+				{
+					change_val = delete_dollar_value(str->command[i][j]);
+					str->command[i][j] = change_val;
+				}
 			}
 			else
 			{
@@ -216,14 +219,14 @@ char	*delete_dollar_value(char *array)
 	char	*join;
 	int		idx;
 	int		len;
-	if (find_dolllar_index(array) != -1)
+	if (find_dollar_index(array) != -1)
 	{
-		len = find_dolllar_index(array);
+		len = find_dollar_index(array);
 		dollar_before = ft_substr(array, 0, len);
 	}
 	if (key_end_index(array) != -1)
 	{
-		idx = key_end_index(array);
+		idx = key_end_index(array) + find_dollar_in_quotes_idx(array);
 		len = after_key_chars_number(array, idx);
 		dollar_after = ft_substr(array, idx, len);
 	}
@@ -237,14 +240,14 @@ char	*overwrite_value(char *array, char *value)
 	char	*join;
 	int		idx;
 	int		len;
-	if (find_dolllar_index(array) != -1)
+	if (find_dollar_index(array) != -1)
 	{
-		len = find_dolllar_index(array);
+		len = find_dollar_index(array);
 		dollar_before = ft_substr(array, 0, len);
 	}
 	if (key_end_index(array) != -1)
 	{
-		idx = key_end_index(array);
+		idx = key_end_index(array) + find_dollar_in_quotes_idx(array);
 		len = after_key_chars_number(array, idx);
 		dollar_after = ft_substr(array, idx, len);
 	}
@@ -253,7 +256,7 @@ char	*overwrite_value(char *array, char *value)
 	return (join);
 }
 
-int	find_dolllar_index(char *s)
+int	find_dollar_index(char *s)
 {
 	int	i;
 
@@ -287,7 +290,7 @@ int	key_end_index(char *s)
 	dollar_str = find_dollar_in_quotes(s);
 	while (dollar_str[i] && (ft_isalnum(dollar_str[i]) || dollar_str[i] == '_' || dollar_str[i] == ' '))
 		i++;
-	return(i);
+	return(i + 1);
 }
 char	*dollar_not_dquote(char *str)
 {
@@ -298,3 +301,17 @@ char	*dollar_not_dquote(char *str)
 		return (NULL);
 	return (copy_acceptable_chars(dollar_str));
 }
+int	find_dollar_in_quotes_idx(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i] && str[i] != '$')
+	{
+		i++;
+	}
+	if (str[i] == '$')
+		return (i);
+	return (-1);
+}
+

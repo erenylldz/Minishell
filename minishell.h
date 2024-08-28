@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 17:28:42 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/27 18:16:40 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/28 16:01:59 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,9 @@ char				*find_dollar_in_quotes(char *str);
 char				*copy_acceptable_chars(char *start);
 int					key_end_index(char *s);
 int					after_key_chars_number(char *s, int idx);
-int					find_dolllar_index(char *s);
+int					find_dollar_index(char *s);
 char				*overwrite_value(char *array, char	*value);
 char				*dollar_not_dquote(char *str);
+int					find_dollar_in_quotes_idx(char *str);
 #endif
 
