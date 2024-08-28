@@ -1,6 +1,6 @@
 NAME = minishell
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 M_SRC = main.c command.c split_func.c exit.c env.c utils.c pwd.c dollar.c redirect.c quote.c dollar_handle.c dollar_handle_utils.c dollar_handle_utils2.c dollar_handle_utils3.c
 LIBSRC = libft/ft_isalpha.c libft/ft_isdigit.c libft/ft_isalnum.c libft/ft_isascii.c libft/ft_isprint.c \
 	libft/ft_strlen.c libft/ft_memset.c libft/ft_bzero.c libft/ft_memcpy.c libft/ft_memmove.c \
@@ -39,7 +39,6 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME)
-
 re: fclean all
 
 .PHONY: all clean fclean re push

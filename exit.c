@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgulfida <kgulfida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 18:54:30 by kgulfida          #+#    #+#             */
-/*   Updated: 2024/08/11 18:54:31 by kgulfida         ###   ########.fr       */
+/*   Updated: 2024/08/28 20:03:16 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	ft_exit(t_cmd *str)
 	int	i;
 
 	exit_status = 0;
-	printf("exit\n");
 	if (str->cmd && strcmp(str->cmd, "exit") == 0)
 	{
 		if (str->args && str->args[1])
