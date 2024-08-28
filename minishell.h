@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 17:28:42 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/28 16:01:59 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/28 18:52:33 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,5 +113,8 @@ int					find_dollar_index(char *s);
 char				*overwrite_value(char *array, char	*value);
 char				*dollar_not_dquote(char *str);
 int					find_dollar_in_quotes_idx(char *str);
+void				handle_dollar_outside_quotes(t_cmd *str, t_env *env_list, int i, int j);
+void				handle_dollar_within_quotes(t_cmd *str, t_env *env_list, int i, int j);
+void				replace_or_delete_value(char **command, t_env *env_list, char *key);
 #endif
 

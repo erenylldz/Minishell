@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 14:20:23 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/25 16:42:29 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/28 18:37:06 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ char	*search_path(t_cmd *str, t_env *env_list)
 	char	**temp;
 
 	temp = take_path(env_list);
+	if (!temp)
+		//hata dönecek
 
 }
 
