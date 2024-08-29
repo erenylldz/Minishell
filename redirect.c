@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 19:38:05 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/28 19:30:43 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/29 17:08:11 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,11 @@ void	get_redirect_name(char	**str)
 
 void	take_name_file(char *s, int x)
 {
-	int	h = 0;
-	int	a = 0;
-	int	o = 0;
-	int	i = 0;
+	static int	h = 0;
+	static int	a = 0;
+	static int	o = 0;
+	static int	i = 0;
+
 	t_cmd	*str = malloc(sizeof(t_cmd));
 	if (!str)
 		return ;
