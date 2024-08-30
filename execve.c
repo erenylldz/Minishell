@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 14:20:23 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/28 20:04:19 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/30 16:51:40 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,8 @@ char	*take_path(t_env *env_list)
 }
 void	read_command(t_cmd *str, t_env *env_list)
 {
+
 	
+
+
 }

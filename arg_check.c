@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 16:25:27 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/29 20:35:50 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/30 19:01:31 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	arg_check(t_cmd *str)
 		get_cmd(str);
 	if (array_count(str) != 0)
 		get_multi_cmd(str);
-
 }
 
 int	array_count(t_cmd *str)

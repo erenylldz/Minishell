@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 19:38:05 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/29 17:08:11 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/30 19:02:43 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,5 +124,10 @@ void	take_name_file(char *s, int x)
 		str->input[i++] = ft_strdup(s);
 	else if (x == OUTPUT)
 		str->output[o++] = ft_strdup(s);
+}
+
+void	*delete_array_value(t_cmd *str, int i, int j)
+{
+		str->command[i][j] = 0;
 }
 
