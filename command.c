@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 13:30:54 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/24 18:22:32 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/31 18:55:40 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	cmd_check(t_cmd *str, t_env	*env_list)
 	handle_dollar(str, env_list);
 	redirect(str);
 	choose_str(str);
-	print_cmd(str);
+	print_cmd(str);// en son silinecek fonksiyon
 }
 
 void	quote_count(t_cmd *str)
@@ -70,15 +70,12 @@ void	ft_split_space(t_cmd *str)
 	while (str->ncmd[str->ncmd_count] != NULL)
 		str->ncmd_count++;
 	str->command = (char ***)malloc((str->ncmd_count + 1) * sizeof(char **));
-	//silinebilir ↓
-	if (!str->command) // malloc'ın başarısız olma durumu kontrol ediliyor
+	if (!str->command)
 		return;
-	//
 	while (str->ncmd[str->i])
 	{
 		str->command[str->i] = ft_split2(str->ncmd[str->i], ' ');
-		//silinebilir ↓
-		if (!str->command[str->i]) // malloc'ın başarısız olma durumu kontrol ediliyor
+		if (!str->command[str->i])
 		{
 			while (str->i-- > 0)
 				free(str->command[str->i]);
@@ -88,19 +85,5 @@ void	ft_split_space(t_cmd *str)
 		str->i++;
 	}
 	str->command[str->ncmd_count] = NULL;
-	// // AŞAĞIDAKİ DÖNGÜ KONTROL AMAÇLI YAZILDI SİLİNECEK!!!!!!!!!!!!
-	// int z;
-    // int y;
-    // z = 0;
-	// while (str->command[z] != NULL)
-	// {
-	// 	y = 0;
-	// 	printf("Command %d:\n", z);
-	// 	while (str->command[z][y] != NULL)
-	// 	{
-	// 		printf("  Arg %d: %s\n", y, str->command[z][y]);
-	// 		y++;
-	// 	}
-	// 	z++;
-	// }
+
 }

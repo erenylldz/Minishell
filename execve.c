@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 14:20:23 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/30 16:51:40 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/31 19:57:20 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,16 @@ char	*take_path(t_env *env_list)
 }
 void	read_command(t_cmd *str, t_env *env_list)
 {
+	int	fd[2];
+	backup_fd(fd);
+	if (array_count(str) == 0)
+		non_pipe()
+	else
+		// pipe var demektir
 
-	
-
-
+}
+void	backup_fd(int fd[2])
+{
+	fd[0] = dup(STDIN_FILENO);
+	fd[1] = dup(STDOUT_FILENO);
 }

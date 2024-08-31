@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 19:38:05 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/30 19:02:43 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/31 18:24:35 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@
 		while (str->command[i][j])
 		{
 			if (array_in_redirect(str->command[i][j]) == 1)
+			{
 				get_redirect_name(str->command[i]);
+				delete_array_value(str, i, j);
+			}
 			j++;
 		}
 		i++;
@@ -126,8 +129,33 @@ void	take_name_file(char *s, int x)
 		str->output[o++] = ft_strdup(s);
 }
 
-void	*delete_array_value(t_cmd *str, int i, int j)
+void	delete_array_value(t_cmd *str, int i, int j)
 {
-		str->command[i][j] = 0;
+		if (is_only_redirection_symbols(str->command[i][j]) == 1)
+		{
+			str->command[i][j] = "";
+			str->command[i][j + 1] = "";
+		}
+		else
+			str->command[i][j] = "";
 }
+int	is_only_redirection_symbols(char *array)
+{
+	int	i;
 
+	i = 0;
+	while (array[i])
+	{
+		if (array[i] == '>' || array[i] == '<')
+		{
+			if (array[i] == '>' && array[i+1] == '>')
+				i++;
+			else if (array[i] == '<' && array[i+1] == '<')
+				i++;
+		}
+		else
+			return (0);
+		i++;
+	}
+	return (1);
+}

@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 13:35:43 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/24 18:10:21 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/08/31 20:10:06 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_strcmp(char *s1, char *s2)
 	return (*(unsigned char *)s1 - *(unsigned char *)s2);
 }
 
-void	print_cmd(t_cmd *str)
+void	print_cmd(t_cmd *str)// silinecek fonksiyon
 {
 	int z;
 	int y;
@@ -66,4 +66,32 @@ void	print_cmd(t_cmd *str)
 		}
 		z++;
 	}
+// 	int	i = 0;
+// 	if (str->append || str->heredoc || str->input || str->output)
+// 	{
+// 		while(str->append[i] != NULL)
+// 		{
+// 			printf("%s\n", str->append[i]);
+// 			i++;
+// 		}
+// 		i = 0;
+// 		while(str->heredoc[i] != NULL)
+// 		{
+// 			printf("%s\n", str->heredoc[i]);
+// 			i++;
+// 		}
+// 		i = 0;
+// 		while(str->input[i] != NULL)
+// 		{
+// 			printf("%s\n", str->input[i]);
+// 			i++;
+// 		}
+// 		i = 0;
+// 		while(str->output[i] != NULL)
+// 		{
+// 			printf("%s\n", str->output[i]);
+// 			i++;
+// 		}
+// 		i = 0;
+// 	}
 }
