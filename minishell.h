@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 17:28:42 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/09/01 15:03:32 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/09/01 17:50:38 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ void				handle_dollar(t_cmd *str, t_env *env_list);
 int					array_in_dollar(char *s);
 int					dollar_between_quotes(char *s);
 void				redirect(t_cmd *str);
-int					array_in_redirect(char *s);
 void				get_redirect_name(char	**str);
 void				take_name_file(char *s, int x);
 void				choose_str(t_cmd *str);
@@ -114,9 +113,12 @@ int					find_dollar_index(char *s);
 char				*overwrite_value(char *array, char	*value);
 char				*dollar_not_dquote(char *str);
 int					find_dollar_in_quotes_idx(char *str);
-void				delete_array_value(t_cmd *str, int i, int j);
+void				delete_redirect_value(t_cmd *str, int i, int j);
 int					is_only_redirection_symbols(char *array);
 void				not_dquote_process(t_cmd *str, t_env *env_list, int i, int j);
 void				in_dquote_process(t_cmd *str, t_env *env_list, int i, int j);
+bool				is_outside_quotes(const char *str);
+void				delete_only_redirect(t_cmd *str, int i, int j);
+int					redirect_array_idx(char	*str);
 #endif
 

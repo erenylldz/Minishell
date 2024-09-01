@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 19:38:05 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/09/01 15:47:57 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/09/01 17:50:59 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@
 		j = 0;
 		while (str->command[i][j])
 		{
-			if (array_in_redirect(str->command[i][j]) == 1)
+			if (is_outside_quotes(str->command[i][j]) == true)
 			{
 				get_redirect_name(str->command[i]);
-				//delete_array_value(str, i, j);
+				delete_redirect_value(str, i, j);
 			}
 			j++;
 		}
@@ -61,20 +61,6 @@ static int	test(char **str, int i, int j)
 		return (0);
 	}
 	return (1);
-}
-
-int	array_in_redirect(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == '>' || s[i] == '<')
-			return (1);
-		i++;
-	}
-	return (0);
 }
 void	get_redirect_name(char	**str)
 {
@@ -128,7 +114,7 @@ void	take_name_file(char *s, int x)
 	}
 }
 
-void	delete_array_value(t_cmd *str, int i, int j)
+void	delete_redirect_value(t_cmd *str, int i, int j)
 {
 		if (is_only_redirection_symbols(str->command[i][j]) == 1)
 		{
@@ -136,8 +122,9 @@ void	delete_array_value(t_cmd *str, int i, int j)
 			str->command[i][j + 1] = "";
 		}
 		else
-			str->command[i][j] = "";
+			delete_only_redirect(str, i, j);
 }
+
 int	is_only_redirection_symbols(char *array)
 {
 	int	i;
@@ -157,4 +144,68 @@ int	is_only_redirection_symbols(char *array)
 		i++;
 	}
 	return (1);
+}
+bool	is_outside_quotes(const char *str)
+{
+	bool single_quote;
+	bool double_quote;
+	int i;
+
+	single_quote = false;
+	double_quote = false;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\'' && !double_quote)
+			single_quote = !single_quote;
+		else if (str[i] == '\"' && !single_quote)
+			double_quote = !double_quote;
+		if (!single_quote && !double_quote)
+		{
+			if ((str[i] == '>' && str[i + 1] == '>') || (str[i] == '<' && str[i + 1] == '<'))
+				return (true);
+			else if (str[i] == '>' || str[i] == '<')
+			 return (true);
+		}
+		i++;
+	}
+	return (false);
+}
+
+void	delete_only_redirect(t_cmd *str, int i, int j)
+{
+	int	x;
+	int	y;
+	char	*temp;
+
+	x = 0;
+	y = 0;
+	temp = malloc(redirect_array_idx(str->command[i][j]) * sizeof(char));
+	while(str->command[i][j][x])
+	{
+		if ((str->command[i][j][x] == '>' && str->command[i][j][x] == '>') || (str->command[i][j][x] == '<' && str->command[i][j][x] == '<'))
+			break;
+		else if (str->command[i][j][x] == '>' || str->command[i][j][x] == '<')
+			break;
+		temp[y] = str->command[i][j][x];
+		x++;
+		y++;
+	}
+	temp[y] = '\0';
+	str->command[i][j] = temp;
+}
+int	redirect_array_idx(char	*str)
+{
+	int	i;
+
+	i = 0;
+	while(str[i])
+	{
+		if ((str[i] == '>' && str[i + 1] == '>') || (str[i] == '<' && str[i + 1] == '<'))
+			break;
+		else if (str[i] == '>' || str[i] == '<')
+		break;
+		i++;
+	}
+	return (i);
 }
