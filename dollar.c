@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 15:21:48 by kgulfida          #+#    #+#             */
-/*   Updated: 2024/08/28 18:53:54 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/09/01 14:49:55 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,54 +37,6 @@ void	handle_dollar(t_cmd *str, t_env *env_list)
 	}
 }
 
-void	replace_or_delete_value(char **command, t_env *env_list, char *key)
-{
-	char *temp;
-	char *change_val;
-
-	if (get_env_value(env_list, key) != NULL)
-	{
-		temp = get_env_value(env_list, key);
-		if (overwrite_value(*command, temp) != NULL)
-		{
-			change_val = overwrite_value(*command, temp);
-			*command = change_val;
-		}
-		else
-		{
-			change_val = delete_dollar_value(*command);
-			*command = change_val;
-		}
-	}
-	else
-	{
-		change_val = delete_dollar_value(*command);
-		*command = change_val;
-	}
-}
-
-void	handle_dollar_within_quotes(t_cmd *str, t_env *env_list, int i, int j)
-{
-	char *key;
-
-	key = dollar_in_dquote(str->command[i][j]);
-	if (key != NULL)
-	{
-		replace_or_delete_value(&(str->command[i][j]), env_list, key);
-	}
-}
-
-void	handle_dollar_outside_quotes(t_cmd *str, t_env *env_list, int i, int j)
-{
-	char *key;
-
-	key = dollar_not_dquote(str->command[i][j]);
-	if (key != NULL)
-	{
-		replace_or_delete_value(&(str->command[i][j]), env_list, key);
-	}
-}
-
 void	dollar_case(t_cmd *str, t_env *env_list)
 {
 	int	i;
@@ -97,16 +49,70 @@ void	dollar_case(t_cmd *str, t_env *env_list)
 		while (str->command[i][j])
 		{
 			if (dollar_in_dquote(str->command[i][j]) != NULL)
-				handle_dollar_within_quotes(str, env_list, i, j);
+				in_dquote_process(str, env_list, i, j);
 			else
-				handle_dollar_outside_quotes(str, env_list, i, j);
+				not_dquote_process(str, env_list, i, j);
 			j++;
 		}
 		i++;
 	}
 }
 
+void	in_dquote_process(t_cmd *str, t_env *env_list, int i, int j)
+{
+	char	*key;
+	char	*change_val;
+	char	*temp;
 
+	key = dollar_in_dquote(str->command[i][j]);
+	if(get_env_value(env_list, key) != NULL)
+	{
+		temp = get_env_value(env_list, key);
+		if (overwrite_value(str->command[i][j], temp) != NULL)
+		{
+			change_val = overwrite_value(str->command[i][j], temp);
+			str->command[i][j] = change_val;
+		}
+		else
+		{
+			change_val = delete_dollar_value(str->command[i][j]);
+			str->command[i][j] = change_val;
+		}
+	}
+	else
+	{
+		change_val = delete_dollar_value(str->command[i][j]);
+		str->command[i][j] = change_val;
+	}
+}
+
+void	not_dquote_process(t_cmd *str, t_env *env_list, int i, int j)
+{
+	char	*key;
+	char	*change_val;
+	char	*temp;
+
+	key = dollar_not_dquote(str->command[i][j]);
+	if (get_env_value(env_list, key) != NULL)
+		{
+			temp = get_env_value(env_list, key);
+			if (overwrite_value(str->command[i][j], temp) != NULL)
+			{
+				change_val = overwrite_value(str->command[i][j], temp);
+				str->command[i][j] = change_val;
+			}
+			else
+			{
+				change_val = delete_dollar_value(str->command[i][j]);
+				str->command[i][j] = change_val;
+			}
+		}
+	else
+	{
+		change_val = delete_dollar_value(str->command[i][j]);
+		str->command[i][j] = change_val;
+	}
+}
 
 
 

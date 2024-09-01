@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 17:28:42 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/31 18:24:05 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/09/01 15:03:32 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,11 @@ typedef struct s_env
 
 typedef struct s_token
 {
+	int		type;
 	char	*data;
 	struct	s_token	*prev;
 	struct	s_token	*next;
-}	t_token;
+}	t_redirect;
 
 void				shell_loop(t_cmd *str, char **env, t_env *env_list);
 void				quote_count(t_cmd *str);
@@ -113,10 +114,9 @@ int					find_dollar_index(char *s);
 char				*overwrite_value(char *array, char	*value);
 char				*dollar_not_dquote(char *str);
 int					find_dollar_in_quotes_idx(char *str);
-void				handle_dollar_outside_quotes(t_cmd *str, t_env *env_list, int i, int j);
-void				handle_dollar_within_quotes(t_cmd *str, t_env *env_list, int i, int j);
-void				replace_or_delete_value(char **command, t_env *env_list, char *key);
 void				delete_array_value(t_cmd *str, int i, int j);
 int					is_only_redirection_symbols(char *array);
+void				not_dquote_process(t_cmd *str, t_env *env_list, int i, int j);
+void				in_dquote_process(t_cmd *str, t_env *env_list, int i, int j);
 #endif
 

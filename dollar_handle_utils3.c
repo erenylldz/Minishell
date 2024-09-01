@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 18:45:22 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/28 18:45:50 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/09/01 16:04:55 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	array_in_dollar(char *s)
 	while (s[i])
 	{
 		if (s[i] == '$')
-			return (i);
+			return (1);
 		i++;
 	}
 	return (-1);

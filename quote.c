@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:40:12 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/24 14:35:33 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/09/01 16:03:08 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,14 @@ char	*swap_command(char *dest, t_cmd *str)
 		return (NULL);
 	while (i < len)
 	{
-		if (dest[i] == '\"' && !str->single_quote)
+		if (dest[i] == '\"' && str->single_quote != true)
 		{
-			str->double_quote = !str->double_quote;
+			str->double_quote = true;
 			i++;
 		}
-		if (dest[i] == '\'' && !str->double_quote)
+		if (dest[i] == '\'' && str->double_quote != true)
 		{
-			str->single_quote = !str->single_quote;
+			str->single_quote = true;
 			i++;
 		}
 		src[j] = dest[i];

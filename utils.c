@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 13:35:43 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/31 20:10:06 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/09/01 14:59:39 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,32 +66,5 @@ void	print_cmd(t_cmd *str)// silinecek fonksiyon
 		}
 		z++;
 	}
-// 	int	i = 0;
-// 	if (str->append || str->heredoc || str->input || str->output)
-// 	{
-// 		while(str->append[i] != NULL)
-// 		{
-// 			printf("%s\n", str->append[i]);
-// 			i++;
-// 		}
-// 		i = 0;
-// 		while(str->heredoc[i] != NULL)
-// 		{
-// 			printf("%s\n", str->heredoc[i]);
-// 			i++;
-// 		}
-// 		i = 0;
-// 		while(str->input[i] != NULL)
-// 		{
-// 			printf("%s\n", str->input[i]);
-// 			i++;
-// 		}
-// 		i = 0;
-// 		while(str->output[i] != NULL)
-// 		{
-// 			printf("%s\n", str->output[i]);
-// 			i++;
-// 		}
-// 		i = 0;
-// 	}
+
 }

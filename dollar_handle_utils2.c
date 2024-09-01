@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dolar_handle_utils.c                               :+:      :+:    :+:   */
+/*   dollar_handle_utils2.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 18:39:46 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/28 18:43:43 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/09/01 14:22:03 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*delete_dollar_value(char *array)
 char	*dollar_in_dquote(char *str)
 {
 	if (count_quotes(str) != 2)
-		return (NULL);
+		return (NULL); 
 	char *start;
 	char *dollar_str;
 
@@ -76,6 +76,7 @@ char	*copy_acceptable_chars(char *start)
 	while (start[i] && (ft_isalnum(start[i]) || start[i] == '_' || start[i] == ' '))
 		i++;
 	char *temp;
+
 	temp = (char *)malloc(i + 1);
 	if (!temp)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 19:38:05 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/08/31 18:24:35 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/09/01 15:47:57 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 			if (array_in_redirect(str->command[i][j]) == 1)
 			{
 				get_redirect_name(str->command[i]);
-				delete_array_value(str, i, j);
+				//delete_array_value(str, i, j);
 			}
 			j++;
 		}
@@ -103,30 +103,29 @@ void	get_redirect_name(char	**str)
 
 void	take_name_file(char *s, int x)
 {
-	static int	h = 0;
-	static int	a = 0;
-	static int	o = 0;
-	static int	i = 0;
-
-	t_cmd	*str = malloc(sizeof(t_cmd));
+	t_redirect	*str = malloc(sizeof(t_redirect));
 	if (!str)
 		return ;
-
-	str->heredoc = malloc(sizeof(char *) * HEREDOC_SIZE);
-	str->append = malloc(sizeof(char *) * APPEND_SIZE);
-	str->input = malloc(sizeof(char *) * INPUT_SIZE);
-	str->output = malloc(sizeof(char *) * OUTPUT_SIZE);
-
-	if (!str->heredoc || !str->append || !str->input || !str->output)
-		return ;
-	if (x == HEREDOC)
-		str->heredoc[h++] = ft_strdup(s);
-	else if(x == APPEND)
-		str->append[a++] = ft_strdup(s);
+	if(x == OUTPUT)
+	{
+		str->data = s;
+		str->type = OUTPUT;
+	}
 	else if(x == INPUT)
-		str->input[i++] = ft_strdup(s);
-	else if (x == OUTPUT)
-		str->output[o++] = ft_strdup(s);
+	{
+		str->data = s;
+		str->type = INPUT;
+	}
+	else if(x == HEREDOC)
+	{
+		str->data = s;
+		str->type = HEREDOC;
+	}
+	else if(x == APPEND)
+	{
+		str->data = s;
+		str->type = APPEND;
+	}
 }
 
 void	delete_array_value(t_cmd *str, int i, int j)
