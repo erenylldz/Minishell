@@ -220,12 +220,16 @@ int	skip_redirection(char *array, int i)
 
 char *copy_after_redirection(char *array)
 {
-    int i = 0;
-    int j = 0;
+    int i;
+    int j;
     char *file;
-    bool inside_double_quotes = false;
-    bool inside_single_quotes = false;
-
+    bool inside_double_quotes;
+    bool inside_single_quotes;
+	
+	i = 0;
+	j = 0;
+	inside_double_quotes = false;
+	inside_single_quotes = false;
     while (array[i])
     {
         i = skip_redirection(array, i);
@@ -271,11 +275,17 @@ char *copy_after_redirection(char *array)
 
 char	*copy_chars_next_array(char *str) 
 {
-    int i = 0, j = 0;
-    int double_quote_seen = 0;
-    int single_quote_seen = 0;
-    char *result = malloc(strlen(str) + 1);
+    int i;
+	int	j;
+    int double_quote_seen;
+    int single_quote_seen;
+    char *result;
 
+	result = malloc(strlen(str) + 1);
+	single_quote_seen = 0;
+	double_quote_seen = 0;
+	i = 0;
+	j = 0;
     if (!result) 
         return (NULL);
     while (str[i]) 
