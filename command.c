@@ -20,7 +20,7 @@ void	cmd_check(t_cmd *str, t_env	*env_list)
 	handle_dollar(str, env_list);
 	redirect(str);
 	choose_str(str);
-	print_cmd(str);// en son silinecek fonksiyon
+	print_cmd(str);
 }
 
 void	quote_count(t_cmd *str)

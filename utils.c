@@ -66,5 +66,4 @@ void	print_cmd(t_cmd *str)// silinecek fonksiyon
 		}
 		z++;
 	}
-
 }

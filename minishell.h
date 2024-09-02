@@ -66,12 +66,12 @@ typedef struct s_env
 	struct s_env	*next;
 }					t_env;
 
-typedef struct s_token
+typedef struct s_redirect
 {
 	int		type;
 	char	*data;
-	struct	s_token	*prev;
-	struct	s_token	*next;
+	struct	s_redirect	*prev;
+	struct	s_redirect	*next;
 }	t_redirect;
 
 void				shell_loop(t_cmd *str, char **env, t_env *env_list);
@@ -94,8 +94,8 @@ void				handle_dollar(t_cmd *str, t_env *env_list);
 int					array_in_dollar(char *s);
 int					dollar_between_quotes(char *s);
 void				redirect(t_cmd *str);
-void				get_redirect_name(char	**str);
-void				take_name_file(char *s, int x);
+void				get_redirect_name(t_cmd *str, int i, int j);
+t_redirect 			*take_name_file(const char *s, int x);
 void				choose_str(t_cmd *str);
 char				*swap_command(char *dest, t_cmd *str);
 void				print_cmd(t_cmd *str);
@@ -120,5 +120,9 @@ void				in_dquote_process(t_cmd *str, t_env *env_list, int i, int j);
 bool				is_outside_quotes(const char *str);
 void				delete_only_redirect(t_cmd *str, int i, int j);
 int					redirect_array_idx(char	*str);
+int					redirection_type(char *array);
+int					skip_redirection(char *array, int i);
+char				*copy_after_redirection(char *array);
+char				*copy_chars_next_array(char *str);
 #endif
 

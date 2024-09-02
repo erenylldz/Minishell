@@ -89,8 +89,6 @@ char	*get_env_value(t_env *env_list, char *key)
 		return (NULL);
 	while (env_list != NULL)
 	{
-		// printf("***%s\n" , key);
-		// printf("---%s\n", env_list->key);
 		if (ft_strcmp(env_list->key, key) == 0)
 			return (env_list->value);
 		env_list = env_list->next;

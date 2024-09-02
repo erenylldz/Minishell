@@ -113,19 +113,3 @@ void	not_dquote_process(t_cmd *str, t_env *env_list, int i, int j)
 		str->command[i][j] = change_val;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
