@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 19:38:05 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/09/01 17:50:59 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/09/03 18:06:37 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 }
 
 
-t_redirect *take_name_file(const char *s, int x)
+t_redirect *take_name_file(const char *s, int x, int loc)
 {
     t_redirect *str;
     size_t len;
@@ -60,9 +60,10 @@ t_redirect *take_name_file(const char *s, int x)
     }
     str->data[i] = '\0';
     str->type = x;
+	str->location = loc;
     str->prev = NULL;
     str->next = NULL;
-	printf("Redirect: %s, Type: %d\n", str->data, str->type); 
+	printf("Redirect: %s, Type: %d\n", str->data, str->type);
     return (str);
 }
 
@@ -179,13 +180,13 @@ void	get_redirect_name(t_cmd *str, int i, int j)
 	{
 		x = redirection_type(str->command[i][j]);
 		file = copy_chars_next_array(str->command[i][j + 1]);
-		take_name_file(file, x);
+		take_name_file(file, x, i);
 	}
 	else if(is_only_redirection_symbols(str->command[i][j]) == 0 && redirection_type(str->command[i][j]) != 0)
 	{
 		x = redirection_type(str->command[i][j]);
 		file = copy_after_redirection(str->command[i][j]);
-		take_name_file(file, x);
+		take_name_file(file, x, i);
 	}
 }
 
@@ -225,7 +226,7 @@ char *copy_after_redirection(char *array)
     char *file;
     bool inside_double_quotes;
     bool inside_single_quotes;
-	
+
 	i = 0;
 	j = 0;
 	inside_double_quotes = false;
@@ -273,7 +274,7 @@ char *copy_after_redirection(char *array)
     return (NULL);
 }
 
-char	*copy_chars_next_array(char *str) 
+char	*copy_chars_next_array(char *str)
 {
     int i;
 	int	j;
@@ -286,11 +287,11 @@ char	*copy_chars_next_array(char *str)
 	double_quote_seen = 0;
 	i = 0;
 	j = 0;
-    if (!result) 
+    if (!result)
         return (NULL);
-    while (str[i]) 
+    while (str[i])
 	{
-        if (str[i] == '\"' && !single_quote_seen) 
+        if (str[i] == '\"' && !single_quote_seen)
 		{
             double_quote_seen = !double_quote_seen;
             i++;

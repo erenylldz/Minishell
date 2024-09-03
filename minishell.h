@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 17:28:42 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/09/01 17:50:38 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/09/03 18:06:53 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_env
 typedef struct s_redirect
 {
 	int		type;
+	int		location;
 	char	*data;
 	struct	s_redirect	*prev;
 	struct	s_redirect	*next;
@@ -103,7 +104,7 @@ int					array_in_dollar(char *s);
 int					dollar_between_quotes(char *s);
 void				redirect(t_cmd *str);
 void				get_redirect_name(t_cmd *str, int i, int j);
-t_redirect 			*take_name_file(const char *s, int x);
+t_redirect 			*take_name_file(const char *s, int x, int loc);
 void				choose_str(t_cmd *str);
 char				*swap_command(char *dest, t_cmd *str);
 void				print_cmd(t_cmd *str);
