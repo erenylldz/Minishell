@@ -52,7 +52,7 @@ void	read_command(t_cmd *str, t_env *env_list)
 	int	fd[2];
 	backup_fd(fd);
 	if (array_count(str) == 0)
-		non_pipe()
+		no_pipe()
 	else
 		// pipe var demektir
 
@@ -61,4 +61,9 @@ void	backup_fd(int fd[2])
 {
 	fd[0] = dup(STDIN_FILENO);
 	fd[1] = dup(STDOUT_FILENO);
+}
+
+void	no_pipe()
+{
+	
 }

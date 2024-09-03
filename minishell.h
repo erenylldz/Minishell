@@ -14,7 +14,6 @@
 # define MINISHELL_H
 
 # include "libft/libft.h"
-# include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
@@ -23,6 +22,12 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+# include <sys/wait.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <sys/ioctl.h>
+# include <fcntl.h>
+# include <errno.h>
 
 # define TRUE 1
 # define FALSE 0
@@ -35,6 +40,7 @@
 # define APPEND_SIZE 999
 # define INPUT_SIZE 999
 # define OUTPUT_SIZE 999
+
 typedef struct s_cmd
 {
 	char			*cmd;
@@ -73,6 +79,8 @@ typedef struct s_redirect
 	struct	s_redirect	*prev;
 	struct	s_redirect	*next;
 }	t_redirect;
+
+extern int	g_globals_exit;
 
 void				shell_loop(t_cmd *str, char **env, t_env *env_list);
 void				quote_count(t_cmd *str);
