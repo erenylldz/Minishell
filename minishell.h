@@ -6,7 +6,7 @@
 /*   By: eryildiz <eryildiz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 17:28:42 by eryildiz          #+#    #+#             */
-/*   Updated: 2024/09/03 18:06:53 by eryildiz         ###   ########.fr       */
+/*   Updated: 2024/09/03 19:42:12 by eryildiz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,14 @@
 # define APPEND 11
 # define INPUT 12
 # define OUTPUT 13
-# define HEREDOC_SIZE 999
-# define APPEND_SIZE 999
-# define INPUT_SIZE 999
-# define OUTPUT_SIZE 999
-
+# define C_PROCESS 101
+# define M_PROCESS 100
+# define HEREDOC_PROECESS 102
 typedef struct s_cmd
 {
 	char			*cmd;
 	char			**ncmd;
 	char			***command;
-	char			**args;
-	char			**heredoc;
-	char			**append;
-	char			**input;
-	char			**output;
 	int				dquote_count;
 	int				squote_count;
 	int				i;
@@ -63,6 +56,7 @@ typedef struct s_cmd
 	int				status; // İşlem durumu için
 	struct s_env	*env_list;
 	char			*in_out;
+	pid_t			pid;
 }					t_cmd;
 
 typedef struct s_env

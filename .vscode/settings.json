@@ -59,7 +59,11 @@
   "files.associations": {
 	"minishell.h": "c",
 	"sstream": "c",
-	"string": "c"
+	"string": "c",
+	"array": "c",
+	"iterator": "c",
+	"string_view": "c",
+	"vector": "c"
 },
   "C_Cpp.errorSquiggles": "disabled"
 }
